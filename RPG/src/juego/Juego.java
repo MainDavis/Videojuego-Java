@@ -71,14 +71,11 @@ public class Juego extends Canvas implements Runnable {
 		leer = new Leer();
 		mapa = new Mapa();
 
-		// String[] colours = { "Red", "Orange", "Yellow", "Green" };
-		// int retVal = Arrays.binarySearch(colours, "Yellow");
-		// System.out.print(retVal);
-
-		// Iniciar el juego
-
 		Juego juego = new Juego();
 		juego.iniciar();
+
+		nivel = 1;
+
 	}
 
 	private synchronized void iniciar() {
@@ -99,6 +96,7 @@ public class Juego extends Canvas implements Runnable {
 	}
 
 	private void actualizar() { // Actualizar las variables del juego
+
 		teclado.actualizar();
 
 		if (teclado.arriba) {
@@ -124,15 +122,13 @@ public class Juego extends Canvas implements Runnable {
 	}
 
 	private void mostrar() { // Metodos para dibujar los gr�ficos
+
 		BufferStrategy estrategia = getBufferStrategy();
 
 		if (estrategia == null) {
 			createBufferStrategy(3);
 			return;
 		}
-
-//		pantalla.limpiar();
-//		pantalla.mostrarMapa(0);
 
 		System.arraycopy(pantalla.pixeles, 0, pixeles, 0, pixeles.length);
 
@@ -147,7 +143,7 @@ public class Juego extends Canvas implements Runnable {
 
 	public void run() { // Lo que se ejecutar� en el segundo Therad
 		final int NS_POR_SEGUNDO = 1000000000; // Nanosegundos por segundo
-		final byte APS_OBJETIVO = 24; // APS Actualizaciones por segundo
+		final byte APS_OBJETIVO = 12; // APS Actualizaciones por segundo
 		final double NS_POR_ACTUALIZACION = NS_POR_SEGUNDO / APS_OBJETIVO;
 
 		long referenciaActualizacion = System.nanoTime();
