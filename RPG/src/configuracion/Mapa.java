@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Mapa extends Leer {
 	private int matriz[][];
-	private List<Integer>[] locObjeto = new List[getObj().size()];
+	private List<Integer>[] locObjeto = new List[getNumLoc()];
 	private List<String> localizaciones;
 	private List<String> adyacenciasLocalizaciones;
 
@@ -48,10 +48,5 @@ public class Mapa extends Leer {
 				locObjeto[localizaciones.indexOf(temp[1])].add(getObj().indexOf(temp[0]));
 			}
 		}
-
-		for (List<Integer> element : locObjeto) {
-			System.out.println(element);
-		}
-
 	}
 }

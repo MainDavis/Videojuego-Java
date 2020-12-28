@@ -11,8 +11,10 @@ import java.awt.image.DataBufferInt;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
+import configuracion.CrearPersonajes;
 import configuracion.Leer;
 import configuracion.Mapa;
+import configuracion.Personajes;
 import control.Teclado;
 import graficos.Pantalla;
 
@@ -38,6 +40,8 @@ public class Juego extends Canvas implements Runnable {
 	private static Teclado teclado;
 	private static Leer leer;
 	private static Mapa mapa;
+	private static CrearPersonajes crearPersonajes;
+	private static Personajes personajes;
 	private static Pantalla pantalla;
 
 	private static BufferedImage imagen = new BufferedImage(ANCHO, ALTO, BufferedImage.TYPE_INT_RGB);
@@ -70,6 +74,38 @@ public class Juego extends Canvas implements Runnable {
 		// Leer los ficheros y configuraci�n
 		leer = new Leer();
 		mapa = new Mapa();
+
+		// Creo los personajes
+		Personajes personajesAi[] = new Personajes[leer.getNumPersonajes() - 1]; // leer.getNumPersonajes()-1 porque el
+																					// primero es el jugador
+
+		// for (int i = 0; i < leer.getNumPersonajes(); i++) {
+		// personajesAi[i] = new Personajes("Hola", 1, 1);
+		// }
+
+		for (int i = 0; i < leer.getNumPersonajes() - 1; i++) {
+			String nombre = leer.getPersonajes().get(i + 1);
+			int loc = leer.getPersonajesLocIni().get(i + 1);
+			int objeto = -1;
+
+			for (String element : leer.getObj()) {
+				String nombrePersonaje = element.split("\\(")[0];
+
+				if (leer.getPersonajes().contains(nombrePersonaje) && nombre.equals(nombrePersonaje)) {
+					objeto = leer.getObj().indexOf(element);
+					continue;
+				}
+			}
+
+			personajesAi[i] = new Personajes(nombre, loc, objeto);
+
+		}
+
+		for (Personajes Ai : personajesAi) {
+			System.out.println(Ai.getNombre());
+		}
+
+		// Fin de creacion de personajes
 
 		Juego juego = new Juego();
 		juego.iniciar();
