@@ -14,8 +14,6 @@ public class Leer {
 	private final List<String> localizacionObjetivo = new ArrayList<String>();
 	private final List<String> ObjetoObjetivo = new ArrayList<String>();
 
-	// private final Leer info = new Leer();
-
 	public Leer() {
 
 		int entrada = 0; // 0->Localizacion, 1->Personajes, 2->Objetos
@@ -24,7 +22,8 @@ public class Leer {
 		// Primero el primer fichero *Estado inicial*
 
 		try {
-			FileReader f = new FileReader("C:\\Users\\David\\Desktop\\JavaProject\\RPG\\recursos\\estado_inicial.txt");
+			String filePath = System.getProperty("user.dir") + "\\recursos\\estado_inicial.txt";
+			FileReader f = new FileReader(filePath);
 			BufferedReader b = new BufferedReader(f);
 
 			while ((linea = b.readLine()) != null) {
@@ -44,13 +43,20 @@ public class Leer {
 						AdyacenciasLocalizaciones.add(linea);
 						localizaciones.add(linea.substring(0, linea.indexOf("(")));
 					}
-					System.out.println(localizaciones + " | " + AdyacenciasLocalizaciones);
+				} else if (entrada == 1) {
+					if (linea.indexOf("(") != -1) {
+						personajes.add(linea);
+					}
+				} else if (entrada == 2) {
+					if (linea.indexOf("(") != -1) {
+						objetos.add(linea);
+					}
 				}
-
-				// System.out.println(linea + " " + entrada);
-
 			}
-
+			System.out.println(localizaciones);
+			System.out.println(AdyacenciasLocalizaciones);
+			System.out.println(personajes);
+			System.out.println(objetos);
 			b.close();
 		} catch (IOException e) {
 			e.printStackTrace();
