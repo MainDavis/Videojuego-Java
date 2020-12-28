@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 import configuracion.Leer;
+import configuracion.Mapa;
 import control.Teclado;
 import graficos.Pantalla;
 
@@ -36,6 +37,7 @@ public class Juego extends Canvas implements Runnable {
 	private static Thread thread;
 	private static Teclado teclado;
 	private static Leer leer;
+	private static Mapa mapa;
 	private static Pantalla pantalla;
 
 	private static BufferedImage imagen = new BufferedImage(ANCHO, ALTO, BufferedImage.TYPE_INT_RGB);
@@ -51,22 +53,23 @@ public class Juego extends Canvas implements Runnable {
 		ventana = new JFrame(NOMBRE); // Creo la ventan
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Hago que cuando el usuario le de a la X se cierre la
 																// App // app
-		ventana.setResizable(false); // Hago que el tamaño de la ventana no pueda ser modificado por el usuario
-		ventana.setLayout(new BorderLayout()); // Organización/Diseño de la ventana
-		ventana.add(this, BorderLayout.CENTER); // Añado a la ventana el canvas y lo pongo en el centro
-		ventana.pack(); // Para que todo funcione con la resolución que hemos puesto
+		ventana.setResizable(false); // Hago que el tamaï¿½o de la ventana no pueda ser modificado por el usuario
+		ventana.setLayout(new BorderLayout()); // Organizaciï¿½n/Diseï¿½o de la ventana
+		ventana.add(this, BorderLayout.CENTER); // Aï¿½ado a la ventana el canvas y lo pongo en el centro
+		ventana.pack(); // Para que todo funcione con la resoluciï¿½n que hemos puesto
 		ventana.setLocationRelativeTo(null); // Fijar la ventana en el centro del escritorio
 		ventana.setVisible(true); // La hago visible
 		ventana.setIconImage(icono.getImage());
 
 		teclado = new Teclado(); // Importo el Teclado
-		addKeyListener(teclado); // Añado un keyListener para que recopile las teclas pulsadas
+		addKeyListener(teclado); // Aï¿½ado un keyListener para que recopile las teclas pulsadas
 
 	}
 
 	public static void main(String[] args) {
-		// Leer los ficheros y configuración
+		// Leer los ficheros y configuraciï¿½n
 		leer = new Leer();
+		mapa = new Mapa();
 
 		// String[] colours = { "Red", "Orange", "Yellow", "Green" };
 		// int retVal = Arrays.binarySearch(colours, "Yellow");
@@ -89,7 +92,7 @@ public class Juego extends Canvas implements Runnable {
 		enFuncionamiento = false;
 
 		try {
-			thread.join(); // Espera a que termine lo que está haciendo el Thread y luego lo detiene
+			thread.join(); // Espera a que termine lo que estï¿½ haciendo el Thread y luego lo detiene
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -120,7 +123,7 @@ public class Juego extends Canvas implements Runnable {
 		aps++;
 	}
 
-	private void mostrar() { // Metodos para dibujar los gráficos
+	private void mostrar() { // Metodos para dibujar los grï¿½ficos
 		BufferStrategy estrategia = getBufferStrategy();
 
 		if (estrategia == null) {
@@ -142,7 +145,7 @@ public class Juego extends Canvas implements Runnable {
 		fps++;
 	}
 
-	public void run() { // Lo que se ejecutará en el segundo Therad
+	public void run() { // Lo que se ejecutarï¿½ en el segundo Therad
 		final int NS_POR_SEGUNDO = 1000000000; // Nanosegundos por segundo
 		final byte APS_OBJETIVO = 24; // APS Actualizaciones por segundo
 		final double NS_POR_ACTUALIZACION = NS_POR_SEGUNDO / APS_OBJETIVO;
