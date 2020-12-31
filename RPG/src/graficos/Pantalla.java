@@ -52,34 +52,35 @@ public final class Pantalla {
 			}
 			// Objetos
 			// Robotito de lucha supremo
-			mostrarSpriteRobot(-30, 0, 4);
-			mostrarSpriteRobot(190, 200, 1);
-			mostrarSpriteRobot(310, 50, 2);
-			mostrarSpriteRobot(420, 200, 3);
-			mostrarSpriteRobot(530, 50, 4);
-			mostrarSpriteRobot(640, 200, 5);
+			mostrarSprite(-30, 0, 4);
+			mostrarSprite(-20, 225, 1);
+			mostrarSprite(-20, 450, 3);
+			mostrarSprite(625, 0, 6);
+			mostrarSprite(625, 225, 7);
+			mostrarSprite(625, 450, 8);
 
-			mostrarSpriteRobot(10, 300, 6);
-			mostrarSpriteRobot(190, 400, 7);
-			mostrarSpriteRobot(620, 350, 8);
-			mostrarSpriteRobot(320, 400, 9);
+			mostrarSprite(225, 0, 5);
+			mostrarSprite(425, 0, 0);
+			mostrarSprite(225, 450, 2);
+			mostrarSprite(425, 450, 9);
 
 			break;
 		}
 
 	}
 
-	public void mostrarSpriteRobot(int posX, int posY, int i) {
+	public void mostrarSprite(int posX, int posY, int personaje) {
 
 		for (int y = 0; y < 192; y++) {
 			for (int x = 0; x < 192; x++) {
 				// gunwoman knight robot skeletonArcher skeletonChief skeletonNormal wizard
-				if (personajes[i].getSprite().pixeles[x + (y * 192)] != 0) {
-					pixeles[x + (y * ancho) + (posY * ancho) + posX] = personajes[i].getSprite().pixeles[x + (y * 192)];
+				if (personajes[personaje].getSprite().pixeles[x + (y * 192)] != 0) {
+					pixeles[x + (y * ancho) + (posY * ancho) + posX] = personajes[personaje].getSprite().pixeles[x
+							+ (y * 192)];
 				}
 			}
 		}
-		personajes[i].upFrame();
+		personajes[personaje].upFrame();
 	}
 
 	public void mostrarSpriteFuego(int posX, int posY, int frame) {
