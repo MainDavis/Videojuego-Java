@@ -13,13 +13,14 @@ public class Animaciones {
 
 		sprites = new Sprites[numSprites];
 		for (int i = 0; i < sprites.length; i++) {
+			System.out.println(ruta + "/idle" + (i + 1) + ".png");
 			sprites[i] = new Sprites(ruta + "/idle" + (i + 1) + ".png", 192, 192); // Todos los personajes tienen
 																					// 192x192
 																					// de tamaño
 		}
 
-		if (frame == numSprites) {
-			frame = 0;
+		if (this.frame == 10) {
+			this.frame = 0;
 		}
 	}
 
@@ -29,6 +30,9 @@ public class Animaciones {
 
 	public void upFrame() {
 		this.frame++;
+		if (this.frame == this.numSprites) {
+			this.frame = 0;
+		}
 	}
 
 	public String getName() {
@@ -39,7 +43,7 @@ public class Animaciones {
 		return numSprites;
 	}
 
-	public Sprites getSprite(int i) {
-		return sprites[i];
+	public Sprites getSprite() {
+		return sprites[this.frame];
 	}
 }

@@ -152,7 +152,7 @@ public class Juego extends Canvas implements Runnable {
 
 		if (nivel == 0 && frame > 14 || nivel == 1 && frame > 17)
 			frame = 0;
-		pantalla.mostrarMapa(nivel, frame);
+		pantalla.mostrarMapa(nivel, 1);
 		frame++;
 		aps++;
 	}

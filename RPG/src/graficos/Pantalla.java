@@ -19,14 +19,14 @@ public final class Pantalla {
 		// Creo el array de personajes con sus animaciones
 		personajes[0] = new Animaciones("gunwoman", 22);
 		personajes[1] = new Animaciones("king", 6);
-		personajes[0] = new Animaciones("knight", 14);
-		personajes[1] = new Animaciones("martial", 8);
-		personajes[0] = new Animaciones("ninja", 4);
-		personajes[1] = new Animaciones("king", 6);
-		personajes[0] = new Animaciones("gunwoman", 22);
-		personajes[1] = new Animaciones("king", 6);
-		personajes[0] = new Animaciones("gunwoman", 22);
-		personajes[1] = new Animaciones("king", 6);
+		personajes[2] = new Animaciones("knight", 14);
+		personajes[3] = new Animaciones("martial", 8);
+		personajes[4] = new Animaciones("ninja", 4);
+		personajes[5] = new Animaciones("robot", 18);
+		personajes[6] = new Animaciones("skeletonArcher", 8);
+		personajes[7] = new Animaciones("skeletonChief", 8);
+		personajes[8] = new Animaciones("skeletonNormal", 8);
+		personajes[9] = new Animaciones("wizard", 10);
 	}
 
 	public void limpiar() {
@@ -52,109 +52,33 @@ public final class Pantalla {
 			}
 			// Objetos
 			// Robotito de lucha supremo
-			mostrarSpriteRobot(245, 400, frame);
+			mostrarSpriteRobot(10, 50, 0);
+			mostrarSpriteRobot(190, 200, 1);
+			mostrarSpriteRobot(310, 50, 2);
+			mostrarSpriteRobot(420, 200, 3);
+			mostrarSpriteRobot(530, 50, 4);
+			mostrarSpriteRobot(640, 200, 5);
+
+			mostrarSpriteRobot(10, 300, 6);
+			mostrarSpriteRobot(190, 400, 7);
+			mostrarSpriteRobot(620, 350, 8);
+			mostrarSpriteRobot(320, 400, 9);
 			break;
 		}
 
 	}
 
-	public void mostrarSpriteRobot(int posX, int posY, int frame) {
+	public void mostrarSpriteRobot(int posX, int posY, int i) {
+
 		for (int y = 0; y < 192; y++) {
 			for (int x = 0; x < 192; x++) {
-				switch (frame) {
-				case 0:
-					if (Sprites.rb0.pixeles[x + (y * 192)] != 16777215) {
-						pixeles[x + (y * ancho) + (posY * ancho) + posX] = Sprites.rb0.pixeles[x + (y * 192)];
-					}
-					break;
-				case 1:
-					if (Sprites.rb1.pixeles[x + (y * 192)] != 16777215) {
-						pixeles[x + (y * ancho) + (posY * ancho) + posX] = Sprites.rb1.pixeles[x + (y * 192)];
-					}
-					break;
-				case 2:
-					if (Sprites.rb2.pixeles[x + (y * 192)] != 16777215) {
-						pixeles[x + (y * ancho) + (posY * ancho) + posX] = Sprites.rb2.pixeles[x + (y * 192)];
-					}
-					break;
-				case 3:
-					if (Sprites.rb3.pixeles[x + (y * 192)] != 16777215) {
-						pixeles[x + (y * ancho) + (posY * ancho) + posX] = Sprites.rb3.pixeles[x + (y * 192)];
-					}
-					break;
-				case 4:
-					if (Sprites.rb4.pixeles[x + (y * 192)] != 16777215) {
-						pixeles[x + (y * ancho) + (posY * ancho) + posX] = Sprites.rb4.pixeles[x + (y * 192)];
-					}
-					break;
-				case 5:
-					if (Sprites.rb5.pixeles[x + (y * 192)] != 16777215) {
-						pixeles[x + (y * ancho) + (posY * ancho) + posX] = Sprites.rb5.pixeles[x + (y * 192)];
-					}
-					break;
-				case 6:
-					if (Sprites.rb6.pixeles[x + (y * 192)] != 16777215) {
-						pixeles[x + (y * ancho) + (posY * ancho) + posX] = Sprites.rb6.pixeles[x + (y * 192)];
-					}
-					break;
-				case 7:
-					if (Sprites.rb7.pixeles[x + (y * 192)] != 16777215) {
-						pixeles[x + (y * ancho) + (posY * ancho) + posX] = Sprites.rb7.pixeles[x + (y * 192)];
-					}
-					break;
-				case 8:
-					if (Sprites.rb8.pixeles[x + (y * 192)] != 16777215) {
-						pixeles[x + (y * ancho) + (posY * ancho) + posX] = Sprites.rb8.pixeles[x + (y * 192)];
-					}
-					break;
-				case 9:
-					if (Sprites.rb9.pixeles[x + (y * 192)] != 16777215) {
-						pixeles[x + (y * ancho) + (posY * ancho) + posX] = Sprites.rb9.pixeles[x + (y * 192)];
-					}
-					break;
-				case 10:
-					if (Sprites.rb10.pixeles[x + (y * 192)] != 16777215) {
-						pixeles[x + (y * ancho) + (posY * ancho) + posX] = Sprites.rb10.pixeles[x + (y * 192)];
-					}
-					break;
-				case 11:
-					if (Sprites.rb11.pixeles[x + (y * 192)] != 16777215) {
-						pixeles[x + (y * ancho) + (posY * ancho) + posX] = Sprites.rb11.pixeles[x + (y * 192)];
-					}
-					break;
-				case 12:
-					if (Sprites.rb12.pixeles[x + (y * 192)] != 16777215) {
-						pixeles[x + (y * ancho) + (posY * ancho) + posX] = Sprites.rb12.pixeles[x + (y * 192)];
-					}
-					break;
-				case 13:
-					if (Sprites.rb13.pixeles[x + (y * 192)] != 16777215) {
-						pixeles[x + (y * ancho) + (posY * ancho) + posX] = Sprites.rb13.pixeles[x + (y * 192)];
-					}
-					break;
-				case 14:
-					if (Sprites.rb14.pixeles[x + (y * 192)] != 16777215) {
-						pixeles[x + (y * ancho) + (posY * ancho) + posX] = Sprites.rb14.pixeles[x + (y * 192)];
-					}
-					break;
-				case 15:
-					if (Sprites.rb15.pixeles[x + (y * 192)] != 16777215) {
-						pixeles[x + (y * ancho) + (posY * ancho) + posX] = Sprites.rb15.pixeles[x + (y * 192)];
-					}
-					break;
-				case 16:
-					if (Sprites.rb16.pixeles[x + (y * 192)] != 16777215) {
-						pixeles[x + (y * ancho) + (posY * ancho) + posX] = Sprites.rb16.pixeles[x + (y * 192)];
-					}
-					break;
-				case 17:
-					if (Sprites.rb17.pixeles[x + (y * 192)] != 16777215) {
-						pixeles[x + (y * ancho) + (posY * ancho) + posX] = Sprites.rb17.pixeles[x + (y * 192)];
-					}
-					break;
+				// gunwoman knight robot skeletonArcher skeletonChief skeletonNormal wizard
+				if (personajes[i].getSprite().pixeles[x + (y * 192)] != 0) {
+					pixeles[x + (y * ancho) + (posY * ancho) + posX] = personajes[i].getSprite().pixeles[x + (y * 192)];
 				}
 			}
 		}
+		personajes[i].upFrame();
 	}
 
 	public void mostrarSpriteFuego(int posX, int posY, int frame) {
