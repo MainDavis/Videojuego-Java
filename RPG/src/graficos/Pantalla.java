@@ -52,7 +52,7 @@ public final class Pantalla {
 			}
 			// Objetos
 			// Robotito de lucha supremo
-			mostrarSpriteRobot(10, 50, 0);
+			mostrarSpriteRobot(-30, 0, 4);
 			mostrarSpriteRobot(190, 200, 1);
 			mostrarSpriteRobot(310, 50, 2);
 			mostrarSpriteRobot(420, 200, 3);
@@ -63,6 +63,7 @@ public final class Pantalla {
 			mostrarSpriteRobot(190, 400, 7);
 			mostrarSpriteRobot(620, 350, 8);
 			mostrarSpriteRobot(320, 400, 9);
+
 			break;
 		}
 
