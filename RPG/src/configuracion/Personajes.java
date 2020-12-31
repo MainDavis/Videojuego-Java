@@ -12,6 +12,7 @@ public class Personajes extends Leer {
 
 	public Personajes(String nombre, int objeto, int localizacion) {
 
+		// Controlar el nombre, localizaciones y Objetos
 		this.nombre = nombre;
 		this.objeto = objeto;
 		this.localizacion = localizacion;
