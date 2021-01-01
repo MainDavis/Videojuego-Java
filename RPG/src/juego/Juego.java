@@ -15,6 +15,7 @@ import configuracion.CrearPersonajes;
 import configuracion.Leer;
 import configuracion.Mapa;
 import configuracion.Personajes;
+import control.Raton;
 import control.Teclado;
 import graficos.Pantalla;
 
@@ -32,12 +33,12 @@ public class Juego extends Canvas implements Runnable {
 
 	private static int aps = 0;
 	private static int fps = 0;
-	private static int frame = 0;
 	private static int nivel = 0;
 
 	private static JFrame ventana;
 	private static Thread thread;
 	private static Teclado teclado;
+	private static Raton raton;
 	private static Leer leer;
 	private static Mapa mapa;
 	private static CrearPersonajes crearPersonajes;
@@ -66,6 +67,7 @@ public class Juego extends Canvas implements Runnable {
 		ventana.setIconImage(icono.getImage());
 
 		teclado = new Teclado(); // Importo el Teclado
+		raton = new Raton(); // Importo el raton
 		addKeyListener(teclado); // A�ado un keyListener para que recopile las teclas pulsadas
 
 	}
@@ -134,6 +136,7 @@ public class Juego extends Canvas implements Runnable {
 	private void actualizar() { // Actualizar las variables del juego
 
 		teclado.actualizar();
+		addMouseListener(raton);
 
 		if (teclado.arriba) {
 
@@ -147,13 +150,15 @@ public class Juego extends Canvas implements Runnable {
 		if (teclado.izquierda) {
 			nivel = 0;
 		}
+		if (raton.click && (raton.posicion[0] > 266 && raton.posicion[0] < 566 && raton.posicion[1] > 270
+				&& raton.posicion[1] < 370)) {
+			nivel = 0;
+		}
 
 		pantalla.limpiar();
 
-		if (nivel == 0 && frame > 14 || nivel == 1 && frame > 17)
-			frame = 0;
 		pantalla.mostrarMapa(nivel, 1);
-		frame++;
+
 		aps++;
 	}
 

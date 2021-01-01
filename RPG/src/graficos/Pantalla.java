@@ -2,7 +2,6 @@ package graficos;
 
 public final class Pantalla {
 
-	private static final int NULL = 0;
 	private final int ancho;
 	private final int alto;
 
@@ -47,33 +46,32 @@ public final class Pantalla {
 			mostrarSpriteFuego(397, 455, frame);
 			break;
 		case 1:
-			for (int i = 0; i < pixeles.length; i++) {
-				pixeles[i] = Sprites.fondo2.pixeles[i];
-			}
-			// Objetos
-			// Robotito de lucha supremo
-			mostrarSprite(-30, 0, 4);
-			mostrarSprite(-20, 225, 1);
-			mostrarSprite(-20, 450, 3);
-			mostrarSprite(625, 0, 6);
-			mostrarSprite(625, 225, 7);
-			mostrarSprite(625, 450, 8);
+			// mostrarFondo(Sprites.fondo2);
+			mostrarSprite(0, 0, Sprites.fondo2);
+			// UI
+			mostrarSprite(266, 270, Sprites.button_start);
+			// Animaciones
+			mostrarSpriteAnim(-30, 0, 4);
+			mostrarSpriteAnim(-20, 225, 1);
+			mostrarSpriteAnim(-20, 450, 3);
+			mostrarSpriteAnim(625, 0, 6);
+			mostrarSpriteAnim(625, 225, 7);
+			mostrarSpriteAnim(625, 450, 8);
 
-			mostrarSprite(225, 0, 5);
-			mostrarSprite(425, 0, 0);
-			mostrarSprite(225, 450, 2);
-			mostrarSprite(425, 450, 9);
+			mostrarSpriteAnim(225, 0, 5);
+			mostrarSpriteAnim(425, 0, 0);
+			mostrarSpriteAnim(225, 450, 2);
+			mostrarSpriteAnim(425, 450, 9);
 
 			break;
 		}
 
 	}
 
-	public void mostrarSprite(int posX, int posY, int personaje) {
+	public void mostrarSpriteAnim(int posX, int posY, int personaje) {
 
 		for (int y = 0; y < 192; y++) {
 			for (int x = 0; x < 192; x++) {
-				// gunwoman knight robot skeletonArcher skeletonChief skeletonNormal wizard
 				if (personajes[personaje].getSprite().pixeles[x + (y * 192)] != 0) {
 					pixeles[x + (y * ancho) + (posY * ancho) + posX] = personajes[personaje].getSprite().pixeles[x
 							+ (y * 192)];
@@ -81,6 +79,22 @@ public final class Pantalla {
 			}
 		}
 		personajes[personaje].upFrame();
+	}
+
+	public void mostrarSprite(int posX, int posY, Sprites sprite) {
+		for (int y = 0; y < sprite.getAlto(); y++) {
+			for (int x = 0; x < sprite.getAncho(); x++) {
+				if (sprite.pixeles[x + (y * sprite.getAncho())] != 0) {
+					pixeles[x + (y * ancho) + (posY * ancho) + posX] = sprite.pixeles[x + (y * sprite.getAncho())];
+				}
+			}
+		}
+	}
+
+	public void mostrarFondo(Sprites sprite) {
+		for (int i = 0; i < pixeles.length; i++) {
+			pixeles[i] = sprite.pixeles[i];
+		}
 	}
 
 	public void mostrarSpriteFuego(int posX, int posY, int frame) {

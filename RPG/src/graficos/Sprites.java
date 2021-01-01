@@ -13,7 +13,8 @@ public class Sprites {
 	// Fondos
 	public static Sprites fondo1 = new Sprites("/texturas/fondo1.png", 832, 640);
 	public static Sprites fondo2 = new Sprites("/texturas/fondo2.png", 832, 640);
-	// Animaciones
+	// UI
+	public static Sprites button_start = new Sprites("/sprites/ui/new_game_button.png", 300, 100);
 	// Fuego
 	public static Sprites fuego0 = new Sprites("/texturas/anim/fuego0.png", 64, 64);
 	public static Sprites fuego1 = new Sprites("/texturas/anim/fuego1.png", 64, 64);
@@ -52,6 +53,10 @@ public class Sprites {
 
 	public int getAncho() {
 		return ancho;
+	}
+
+	public int getAlto() {
+		return alto;
 	}
 
 }
