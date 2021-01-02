@@ -4,11 +4,11 @@ Comedor(Jardín, Cocina, Dormitorio)
 Cocina(Comedor)
 Dormitorio(Comedor, Jardín)
 <Personajes>
-king(Comedor)
+knight(Comedor)
 gunwoman(Dormitorio)
 robot(Jardín)
 <Objetos>
 Llave(Cocina)
 Ordenador(Comedor)
 Cartera(Jardín)
-Pan(Jorge)
+Pan(robot)

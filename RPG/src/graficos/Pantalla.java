@@ -26,6 +26,7 @@ public final class Pantalla {
 		personajes[7] = new Animaciones("skeletonChief", 8);
 		personajes[8] = new Animaciones("skeletonNormal", 8);
 		personajes[9] = new Animaciones("wizard", 10);
+
 	}
 
 	public void limpiar() {
@@ -39,15 +40,14 @@ public final class Pantalla {
 		case 0: // Menu
 			// Primero pinto el fondo
 			for (int i = 0; i < pixeles.length; i++) {
-				pixeles[i] = Sprites.fondo1.pixeles[i];
+				pixeles[i] = Sprites.castillo.pixeles[i];
 			}
 			// Objetos
-			// fuego
-			mostrarSpriteFuego(397, 455, frame);
+
 			break;
 		case 1:
 			// mostrarFondo(Sprites.fondo2);
-			mostrarSprite(0, 0, Sprites.fondo2);
+			mostrarSprite(0, 0, Sprites.menu_background);
 			// UI
 			mostrarSprite(266, 270, Sprites.button_start);
 			// Animaciones
@@ -94,90 +94,6 @@ public final class Pantalla {
 	public void mostrarFondo(Sprites sprite) {
 		for (int i = 0; i < pixeles.length; i++) {
 			pixeles[i] = sprite.pixeles[i];
-		}
-	}
-
-	public void mostrarSpriteFuego(int posX, int posY, int frame) {
-		for (int y = 0; y < 64; y++) {
-			for (int x = 0; x < 64; x++) {
-				switch (frame) {
-				case 0:
-					if (Sprites.fuego0.pixeles[x + (y * 64)] != -1) {
-						pixeles[x + (y * ancho) + (posY * ancho) + posX] = Sprites.fuego0.pixeles[x + (y * 64)];
-					}
-					break;
-				case 1:
-					if (Sprites.fuego1.pixeles[x + (y * 64)] != -1) {
-						pixeles[x + (y * ancho) + (posY * ancho) + posX] = Sprites.fuego1.pixeles[x + (y * 64)];
-					}
-					break;
-				case 2:
-					if (Sprites.fuego2.pixeles[x + (y * 64)] != -1) {
-						pixeles[x + (y * ancho) + (posY * ancho) + posX] = Sprites.fuego2.pixeles[x + (y * 64)];
-					}
-					break;
-				case 3:
-					if (Sprites.fuego3.pixeles[x + (y * 64)] != -1) {
-						pixeles[x + (y * ancho) + (posY * ancho) + posX] = Sprites.fuego3.pixeles[x + (y * 64)];
-					}
-					break;
-				case 4:
-					if (Sprites.fuego4.pixeles[x + (y * 64)] != -1) {
-						pixeles[x + (y * ancho) + (posY * ancho) + posX] = Sprites.fuego4.pixeles[x + (y * 64)];
-					}
-					break;
-				case 5:
-					if (Sprites.fuego5.pixeles[x + (y * 64)] != -1) {
-						pixeles[x + (y * ancho) + (posY * ancho) + posX] = Sprites.fuego5.pixeles[x + (y * 64)];
-					}
-					break;
-				case 6:
-					if (Sprites.fuego6.pixeles[x + (y * 64)] != -1) {
-						pixeles[x + (y * ancho) + (posY * ancho) + posX] = Sprites.fuego6.pixeles[x + (y * 64)];
-					}
-					break;
-				case 7:
-					if (Sprites.fuego7.pixeles[x + (y * 64)] != -1) {
-						pixeles[x + (y * ancho) + (posY * ancho) + posX] = Sprites.fuego7.pixeles[x + (y * 64)];
-					}
-					break;
-				case 8:
-					if (Sprites.fuego8.pixeles[x + (y * 64)] != -1) {
-						pixeles[x + (y * ancho) + (posY * ancho) + posX] = Sprites.fuego8.pixeles[x + (y * 64)];
-					}
-					break;
-				case 9:
-					if (Sprites.fuego9.pixeles[x + (y * 64)] != -1) {
-						pixeles[x + (y * ancho) + (posY * ancho) + posX] = Sprites.fuego9.pixeles[x + (y * 64)];
-					}
-					break;
-				case 10:
-					if (Sprites.fuego10.pixeles[x + (y * 64)] != -1) {
-						pixeles[x + (y * ancho) + (posY * ancho) + posX] = Sprites.fuego10.pixeles[x + (y * 64)];
-					}
-					break;
-				case 11:
-					if (Sprites.fuego11.pixeles[x + (y * 64)] != -1) {
-						pixeles[x + (y * ancho) + (posY * ancho) + posX] = Sprites.fuego11.pixeles[x + (y * 64)];
-					}
-					break;
-				case 12:
-					if (Sprites.fuego12.pixeles[x + (y * 64)] != -1) {
-						pixeles[x + (y * ancho) + (posY * ancho) + posX] = Sprites.fuego12.pixeles[x + (y * 64)];
-					}
-					break;
-				case 13:
-					if (Sprites.fuego13.pixeles[x + (y * 64)] != -1) {
-						pixeles[x + (y * ancho) + (posY * ancho) + posX] = Sprites.fuego13.pixeles[x + (y * 64)];
-					}
-					break;
-				case 14:
-					if (Sprites.fuego14.pixeles[x + (y * 64)] != -1) {
-						pixeles[x + (y * ancho) + (posY * ancho) + posX] = Sprites.fuego14.pixeles[x + (y * 64)];
-					}
-					break;
-				}
-			}
 		}
 	}
 

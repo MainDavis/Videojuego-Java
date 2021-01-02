@@ -1,10 +1,12 @@
 package configuracion;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Mapa extends Leer {
 	private int matriz[][];
-	private List<Integer>[] locObjeto = new List[getNumLoc()];
+	private List<Integer>[] locObjeto = new List[getNumLoc()]; // Array de listas -> locObjeto[indexLocalizaciones] =
+																// Lista de objetos que hay en esa localización
 	private List<String> localizaciones;
 	private List<String> adyacenciasLocalizaciones;
 
@@ -26,16 +28,22 @@ public class Mapa extends Leer {
 		}
 
 		// Preparo el array de listas
-//		for (int i = 0; i < getObj().size(); i++) {
-//			locObjeto[i] = new ArrayList<>();
-//		}
-//		// Meto los valores
-//		for (String element : getLocObj()) {
-//			String temp[] = element.split("\\(");
-//			temp[1] = temp[1].substring(0, temp[1].length() - 1);
-//			if (localizaciones.contains(temp[1])) {
-//				locObjeto[localizaciones.indexOf(temp[1])].add(getObj().indexOf(temp[0]));
-//			}
-//		}
+		for (int i = 0; i < getObj().size(); i++) {
+			locObjeto[i] = new ArrayList<>();
+		}
+
+		// Meto los valores
+		int i = 0;
+		for (String element : getLocObj()) {
+			System.out.println("Elemento: " + element + " Localizaciones: " + localizaciones.toString());
+			if (localizaciones.contains(element)) {
+				locObjeto[localizaciones.indexOf(element)].add(i);
+				i++;
+			}
+		}
+
+		for (List<Integer> element : locObjeto) {
+			System.out.println(element.toString());
+		}
 	}
 }

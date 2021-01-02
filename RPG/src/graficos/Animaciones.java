@@ -13,7 +13,6 @@ public class Animaciones {
 
 		sprites = new Sprites[numSprites];
 		for (int i = 0; i < sprites.length; i++) {
-			System.out.println(ruta + "/idle" + (i + 1) + ".png");
 			sprites[i] = new Sprites(ruta + "/idle" + (i + 1) + ".png", 192, 192); // Todos los personajes tienen
 																					// 192x192
 																					// de tamaño
