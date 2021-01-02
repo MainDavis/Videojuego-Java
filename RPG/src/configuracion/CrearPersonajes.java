@@ -9,7 +9,7 @@ public class CrearPersonajes extends Leer {
 			System.out.println("Hola");
 			personaje[i].setNombre(getPersonajes().get(i));
 
-			personaje[i].setLocalizacion(getPersonajesLocIni().get(i));
+			// personaje[i].setLocalizacion(getPersonajesLocIni().get(i));
 		}
 		// Añado el objeto inicial que pueda tener
 

@@ -4,9 +4,9 @@ Comedor(Jardín, Cocina, Dormitorio)
 Cocina(Comedor)
 Dormitorio(Comedor, Jardín)
 <Personajes>
-Jorge(Comedor)
-Esther(Dormitorio)
-María(Jardín)
+king(Comedor)
+gunwoman(Dormitorio)
+robot(Jardín)
 <Objetos>
 Llave(Cocina)
 Ordenador(Comedor)
