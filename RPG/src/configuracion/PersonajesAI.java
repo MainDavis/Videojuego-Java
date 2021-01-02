@@ -25,7 +25,7 @@ public class PersonajesAI extends Leer {
 		this.objeto = objeto;
 		this.localizacion = localizacion;
 
-		portrait = new Sprites("/sprites/portraits/" + nombre + ".png", 64, 64);
+		portrait = new Sprites("/sprites/portraits/" + nombre + ".png", 114, 64);
 
 		// Tanto las creencias como los registros empiezan vacios
 

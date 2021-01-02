@@ -23,8 +23,8 @@ public class Juego extends Canvas implements Runnable {
 
 	private static final long serialVersionUID = 1L;
 
-	private static final int ANCHO = 832; // 832
-	private static final int ALTO = 640;
+	private static final int ANCHO = 1366; // 832
+	private static final int ALTO = 768;
 
 	private static volatile boolean enFuncionamiento = false; // "Volatile" es que solo pueda ser usado por un Thread a
 																// la vez
@@ -75,34 +75,16 @@ public class Juego extends Canvas implements Runnable {
 		leer = new Leer();
 		mapa = new Mapa();
 		// Creo los personajes
-		PersonajesAI personajesAI[] = new PersonajesAI[leer.getNumPersonajes() - 1]; // leer.getNumPersonajes()-1 porque
-		// el
-		// primero es el jugador
+		PersonajesAI personajesAI[] = new PersonajesAI[leer.getNumPersonajes() - 1];
 
-		for (int i = 0; i < leer.getNumPersonajes() - 1; i++) {
-			personajesAI[i] = new PersonajesAI(leer.getPersonajes().get(i), leer.getPersonajeLocIniINT(i),
+		for (int i = 1; i < leer.getNumPersonajes(); i++) { // Empiezo en 1 porque el primero es el jugador
+			personajesAI[i - 1] = new PersonajesAI(leer.getPersonajes().get(i), leer.getPersonajeLocIniINT(i),
 					leer.getPersonajeObjetoInicial(leer.getPersonajes().get(i)));
 		}
 
-//		for (int i = 0; i < leer.getNumPersonajes() - 1; i++) {
-//			String nombre = leer.getPersonajes().get(i + 1);
-//			// int loc = leer.getPersonajesLocIni().get(i + 1);
-//			int objeto = -1;
-//
-//			for (String element : leer.getObj()) {
-//				String nombrePersonaje = element.split("\\(")[0];
-//
-//				if (leer.getPersonajes().contains(nombrePersonaje) && nombre.equals(nombrePersonaje)) {
-//					objeto = leer.getObj().indexOf(element);
-//					continue;
-//				}
-//			}
-
-		// personajesAi[i] = new Personajes(nombre, loc, objeto);
-
-		// for (Personajes Ai : personajesAi) {
-		// System.out.println(Ai.getNombre());
-		// }
+		for (PersonajesAI Ai : personajesAI) {
+			System.out.println(Ai.getNombre());
+		}
 
 		// Fin de creacion de personajes
 
@@ -110,7 +92,7 @@ public class Juego extends Canvas implements Runnable {
 
 		juego.iniciar();
 
-		nivel = 1;
+		// nivel = 1;
 
 	}
 

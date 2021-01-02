@@ -1,9 +1,10 @@
 <Localización Personajes>
-Jorge(Jardín)
-Esther(Comedor)
-María(Comedor)
+Knight(Bambu)
+Gunwoman(Catedral)
+Robot(Muerte)
+Wizard(Catedral)
 <Posesión Objetos>
-Llave(Esther)
-Ordenador
-Cartera(Jorge)
-Pan(María)
+Yelmo(Gunwoman)
+Llave(Wizard)
+Pocion(Robot)
+Espada(Knight)

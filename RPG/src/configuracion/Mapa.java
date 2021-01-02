@@ -35,15 +35,10 @@ public class Mapa extends Leer {
 		// Meto los valores
 		int i = 0;
 		for (String element : getLocObj()) {
-			System.out.println("Elemento: " + element + " Localizaciones: " + localizaciones.toString());
 			if (localizaciones.contains(element)) {
 				locObjeto[localizaciones.indexOf(element)].add(i);
 				i++;
 			}
-		}
-
-		for (List<Integer> element : locObjeto) {
-			System.out.println(element.toString());
 		}
 	}
 }
