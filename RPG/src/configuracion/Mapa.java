@@ -3,16 +3,25 @@ package configuracion;
 import java.util.ArrayList;
 import java.util.List;
 
+import graficos.Sprites;
+
 public class Mapa extends Leer {
 	private int matriz[][];
 	private List<Integer>[] locObjeto = new List[getNumLoc()]; // Array de listas -> locObjeto[indexLocalizaciones] =
 																// Lista de objetos que hay en esa localización
 	private List<String> localizaciones;
 	private List<String> adyacenciasLocalizaciones;
+	private Sprites localizacionesSprites[] = new Sprites[getNumLoc()];
 
 	public Mapa() {
 		this.localizaciones = getLoc();
 		this.adyacenciasLocalizaciones = getAdLoc();
+
+		int iteracion = 0;
+		for (String element : localizaciones) {
+			localizacionesSprites[iteracion] = new Sprites("/sprites/fondos/" + element + ".png", 1366, 768);
+			iteracion++;
+		}
 
 		// Gracias a la matriz de adyacencias puedo usar el mapa como un grafo
 		this.matriz = new int[getNumLoc()][getNumLoc()];
@@ -41,4 +50,9 @@ public class Mapa extends Leer {
 			}
 		}
 	}
+
+	public Sprites getLocSprite(int index) {
+		return localizacionesSprites[index];
+	}
+
 }

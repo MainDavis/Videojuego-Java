@@ -8,17 +8,13 @@ public class Teclado implements KeyListener {
 	private final static int numTeclas = 120;
 	private boolean[] teclas = new boolean[numTeclas];
 
-	public boolean arriba;
-	public boolean abajo;
-	public boolean izquierda;
-	public boolean derecha;
+	public boolean h;
+	public boolean escape;
 
 	public void actualizar() {
 
-		arriba = teclas[KeyEvent.VK_W];
-		abajo = teclas[KeyEvent.VK_S];
-		izquierda = teclas[KeyEvent.VK_A];
-		derecha = teclas[KeyEvent.VK_D];
+		h = teclas[KeyEvent.VK_H];
+		escape = teclas[KeyEvent.VK_ESCAPE];
 
 	}
 

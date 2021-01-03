@@ -19,4 +19,12 @@ public class Raton extends MouseAdapter {
 		click = false;
 	}
 
+	// Cambiar el click
+	public boolean clickBtt(Boton btt) {
+		if (click && posicion[0] > btt.getPosX() && posicion[0] < btt.getPosX() + btt.getTamX()
+				&& posicion[1] > btt.getPosY() && posicion[1] < btt.getPosY() + btt.getTamY())
+			return true;
+		return false;
+	}
+
 }

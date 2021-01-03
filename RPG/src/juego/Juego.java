@@ -11,9 +11,11 @@ import java.awt.image.DataBufferInt;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
+import configuracion.Jugador;
 import configuracion.Leer;
 import configuracion.Mapa;
 import configuracion.PersonajesAI;
+import control.Boton;
 import control.Raton;
 import control.Teclado;
 import graficos.Pantalla;
@@ -39,9 +41,13 @@ public class Juego extends Canvas implements Runnable {
 	private static Thread thread;
 	private static Teclado teclado;
 	private static Raton raton;
-	private static Leer leer;
-	private static Mapa mapa;
+	private static Leer leer = new Leer();
+	private static Mapa mapa = new Mapa();
+	private static PersonajesAI personajesAI[] = new PersonajesAI[leer.getNumPersonajes() - 1];
 	private static Pantalla pantalla;
+
+	// Creo los botones
+	private static Boton btt_newGame = new Boton(533, 334, 300, 100);
 
 	private static BufferedImage imagen = new BufferedImage(ANCHO, ALTO, BufferedImage.TYPE_INT_RGB);
 	private static int[] pixeles = ((DataBufferInt) imagen.getRaster().getDataBuffer()).getData();
@@ -49,6 +55,8 @@ public class Juego extends Canvas implements Runnable {
 	private static final ImageIcon icono = new ImageIcon(Juego.class.getResource("/icono.png"));
 
 	private Juego() {
+
+		// Hago todo lo que tenga que ver con la pa
 		setPreferredSize(new Dimension(ANCHO, ALTO));
 
 		pantalla = new Pantalla(ANCHO, ALTO);
@@ -71,11 +79,8 @@ public class Juego extends Canvas implements Runnable {
 	}
 
 	public static void main(String[] args) {
-		// Leer los ficheros y configuraci�n
-		leer = new Leer();
-		mapa = new Mapa();
+
 		// Creo los personajes
-		PersonajesAI personajesAI[] = new PersonajesAI[leer.getNumPersonajes() - 1];
 
 		for (int i = 1; i < leer.getNumPersonajes(); i++) { // Empiezo en 1 porque el primero es el jugador
 			personajesAI[i - 1] = new PersonajesAI(leer.getPersonajes().get(i), leer.getPersonajeLocIniINT(i),
@@ -85,14 +90,20 @@ public class Juego extends Canvas implements Runnable {
 		for (PersonajesAI Ai : personajesAI) {
 			System.out.println(Ai.getNombre());
 		}
-
 		// Fin de creacion de personajes
+		// Creo el personaje del Jugador
+		Jugador jugador = new Jugador(leer.getPersonajes().get(0), leer.getPersonajeLocIniINT(0),
+				leer.getPersonajeObjetoInicial(leer.getPersonajes().get(0)));
 
 		Juego juego = new Juego();
 
-		juego.iniciar();
+		juego.iniciar(); // Para los graficos y los controles
 
-		// nivel = 1;
+		do {
+			if (nivel == 1) {
+
+			}
+		} while (true);
 
 	}
 
@@ -115,31 +126,31 @@ public class Juego extends Canvas implements Runnable {
 
 	private void actualizar() { // Actualizar las variables del juego
 
+		pantalla.limpiar(); // Limpio la pantalla
+
 		teclado.actualizar();
 		addMouseListener(raton);
 
-		if (teclado.arriba) {
-
+		if (teclado.h) {
+			System.out.print("AYUDA");
 		}
-		if (teclado.abajo) {
-
-		}
-		if (teclado.derecha) {
-			nivel = 1;
-		}
-		if (teclado.izquierda) {
-			nivel = 0;
-		}
-		if (raton.click && (raton.posicion[0] > 266 && raton.posicion[0] < 566 && raton.posicion[1] > 270
-				&& raton.posicion[1] < 370)) {
-			nivel = 0;
+		if (teclado.escape) {
+			System.out.print("Saliendo");
+			System.exit(-1);
 		}
 
-		pantalla.limpiar();
-
-		pantalla.mostrarMapa(nivel, 1);
-
-		pantalla.mostrarSprite(100, 100, Sprites.robot);
+		switch (nivel) {
+		case 0: // Menu inicial
+			pantalla.mostrarMenu();
+			if (raton.clickBtt(btt_newGame)) {
+				nivel = 1;
+				System.out.print("CLICK");
+			}
+			break;
+		case 1: // Juego
+			pantalla.mostrarSprite(0, 0, Sprites.castillo);
+			break;
+		}
 
 		aps++;
 	}

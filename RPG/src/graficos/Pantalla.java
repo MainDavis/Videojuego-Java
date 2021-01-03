@@ -35,36 +35,14 @@ public final class Pantalla {
 		}
 	}
 
-	public void mostrarMapa(int mapa, int frame) {
-		switch (mapa) {
-		case 0: // Menu
-			// Primero pinto el fondo
-			for (int i = 0; i < pixeles.length; i++) {
-				pixeles[i] = Sprites.castillo.pixeles[i];
-			}
-			// Objetos
+	public void mostrarMenu() {
 
-			break;
-		case 1:
-			// mostrarFondo(Sprites.fondo2);
-			mostrarSprite(0, 0, Sprites.menu_background);
-			// UI
-			mostrarSprite(266, 270, Sprites.button_start);
-			// Animaciones
-			mostrarSpriteAnim(-30, 0, 4);
-			mostrarSpriteAnim(-20, 225, 1);
-			mostrarSpriteAnim(-20, 450, 3);
-			mostrarSpriteAnim(625, 0, 6);
-			mostrarSpriteAnim(625, 225, 7);
-			mostrarSpriteAnim(625, 450, 8);
-
-			mostrarSpriteAnim(225, 0, 5);
-			mostrarSpriteAnim(425, 0, 0);
-			mostrarSpriteAnim(225, 450, 2);
-			mostrarSpriteAnim(425, 450, 9);
-
-			break;
-		}
+		// mostrarFondo(Sprites.fondo2);
+		mostrarSprite(0, 0, Sprites.menu_background);
+		// UI
+		mostrarSprite(533, 334, Sprites.button_start);
+		// Robot
+		mostrarSpriteAnim(475, 510, 5);
 
 	}
 
