@@ -27,6 +27,10 @@ public class Boton {
 		this.click = estado;
 	}
 
+	public boolean getClick() {
+		return click;
+	}
+
 	public int getPosX() {
 		return posX;
 	}

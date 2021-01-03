@@ -8,7 +8,8 @@ import graficos.Sprites;
 public class PersonajesAI extends Leer {
 
 	private String nombre;
-	private int objeto, localizacion; // objeto = -1 si no tiene objeto
+	private int objeto, localizacion;
+	private final int objetivoObjeto, objetivolocalizacion; // objeto = -1 si no tiene objeto
 
 	private List<Integer> creenciasLocPersonajes[] = new List[getNumLoc()];
 	private List<Integer> creenciasLocObjetos[] = new List[getNumLoc()];
@@ -18,12 +19,14 @@ public class PersonajesAI extends Leer {
 
 	private Sprites portrait;
 
-	public PersonajesAI(String nombre, int objeto, int localizacion) {
+	public PersonajesAI(String nombre, int objeto, int localizacion, int objetivoObjeto, int objetivoLocalizacion) {
 
 		// Controlar el nombre, localizaciones y Objetos
 		this.nombre = nombre;
 		this.objeto = objeto;
 		this.localizacion = localizacion;
+		this.objetivoObjeto = objetivoObjeto;
+		this.objetivolocalizacion = objetivoLocalizacion;
 
 		portrait = new Sprites("/sprites/portraits/" + nombre + ".png", 114, 64);
 

@@ -19,7 +19,6 @@ import control.Boton;
 import control.Raton;
 import control.Teclado;
 import graficos.Pantalla;
-import graficos.Sprites;
 
 public class Juego extends Canvas implements Runnable {
 
@@ -44,6 +43,7 @@ public class Juego extends Canvas implements Runnable {
 	private static Leer leer = new Leer();
 	private static Mapa mapa = new Mapa();
 	private static PersonajesAI personajesAI[] = new PersonajesAI[leer.getNumPersonajes() - 1];
+	private static Jugador jugador;
 	private static Pantalla pantalla;
 
 	// Creo los botones
@@ -59,7 +59,7 @@ public class Juego extends Canvas implements Runnable {
 		// Hago todo lo que tenga que ver con la pa
 		setPreferredSize(new Dimension(ANCHO, ALTO));
 
-		pantalla = new Pantalla(ANCHO, ALTO);
+		pantalla = new Pantalla(ANCHO, ALTO, jugador.getNumAnimacion());
 
 		ventana = new JFrame(NOMBRE); // Creo la ventan
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Hago que cuando el usuario le de a la X se cierre la
@@ -84,16 +84,14 @@ public class Juego extends Canvas implements Runnable {
 
 		for (int i = 1; i < leer.getNumPersonajes(); i++) { // Empiezo en 1 porque el primero es el jugador
 			personajesAI[i - 1] = new PersonajesAI(leer.getPersonajes().get(i), leer.getPersonajeLocIniINT(i),
-					leer.getPersonajeObjetoInicial(leer.getPersonajes().get(i)));
+					leer.getPersonajeObjetoInicial(leer.getPersonajes().get(i)), leer.getObjObjetivo(i),
+					leer.getLocObjetivo(i));
 		}
 
-		for (PersonajesAI Ai : personajesAI) {
-			System.out.println(Ai.getNombre());
-		}
 		// Fin de creacion de personajes
 		// Creo el personaje del Jugador
-		Jugador jugador = new Jugador(leer.getPersonajes().get(0), leer.getPersonajeLocIniINT(0),
-				leer.getPersonajeObjetoInicial(leer.getPersonajes().get(0)));
+		jugador = new Jugador(leer.getPersonajes().get(0), leer.getPersonajeObjetoInicial(leer.getPersonajes().get(0)),
+				leer.getPersonajeLocIniINT(0), leer.getObjObjetivo(0), leer.getLocObjetivo(0));
 
 		Juego juego = new Juego();
 
@@ -142,13 +140,14 @@ public class Juego extends Canvas implements Runnable {
 		switch (nivel) {
 		case 0: // Menu inicial
 			pantalla.mostrarMenu();
-			if (raton.clickBtt(btt_newGame)) {
+			raton.actualizarClickBtt(btt_newGame);
+			if (btt_newGame.getClick()) {
 				nivel = 1;
 				System.out.print("CLICK");
 			}
 			break;
 		case 1: // Juego
-			pantalla.mostrarSprite(0, 0, Sprites.castillo);
+			pantalla.mostrarJuego(personajesAI, jugador, mapa);
 			break;
 		}
 

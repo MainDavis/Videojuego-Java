@@ -1,5 +1,9 @@
 package graficos;
 
+import configuracion.Jugador;
+import configuracion.Mapa;
+import configuracion.PersonajesAI;
+
 public final class Pantalla {
 
 	private final int ancho;
@@ -8,8 +12,9 @@ public final class Pantalla {
 	public final int[] pixeles;
 
 	private Animaciones personajes[] = new Animaciones[10];
+	private final int animJugador;
 
-	public Pantalla(final int ancho, final int alto) {
+	public Pantalla(final int ancho, final int alto, int animJugador) {
 		this.ancho = ancho;
 		this.alto = alto;
 
@@ -26,6 +31,9 @@ public final class Pantalla {
 		personajes[7] = new Animaciones("skeletonChief", 8);
 		personajes[8] = new Animaciones("skeletonNormal", 8);
 		personajes[9] = new Animaciones("wizard", 10);
+
+		//
+		this.animJugador = animJugador;
 
 	}
 
@@ -44,6 +52,19 @@ public final class Pantalla {
 		// Robot
 		mostrarSpriteAnim(475, 510, 5);
 
+	}
+
+	public void mostrarJuego(PersonajesAI AI[], Jugador jugador, Mapa mapa) {
+		// Primero imprimo la localización en la que está el jugador
+		mostrarSprite(0, 0, mapa.getLocSprite(jugador.getLoc()));
+		// Imprimo el personaje del jugador
+		mostrarSpriteAnim(587, 288, animJugador);
+		// Imprimo el objeto
+		if (jugador.getObj() != -1) // Si tengo un objeto
+			mostrarSprite(651, 10, mapa.getObjSprite(jugador.getObj()));
+		// Imprimo los dos objetivos, la localizacion y el objeto
+		mostrarSprite(1100, 100, mapa.getObjSprite(jugador.getObjObjetivo())); // Objeto
+		mostrarSprite(1200, 100, mapa.getLocPortraitSprite(jugador.getLocObjetivo()));
 	}
 
 	public void mostrarSpriteAnim(int posX, int posY, int personaje) {

@@ -12,14 +12,29 @@ public class Mapa extends Leer {
 	private List<String> localizaciones;
 	private List<String> adyacenciasLocalizaciones;
 	private Sprites localizacionesSprites[] = new Sprites[getNumLoc()];
+	private Sprites locPortraitSprites[] = new Sprites[getNumLoc()];
+	private Sprites objetosSprites[] = new Sprites[getNumObj()];
 
 	public Mapa() {
 		this.localizaciones = getLoc();
 		this.adyacenciasLocalizaciones = getAdLoc();
 
+		// Creo los sprites de las localizaciones
 		int iteracion = 0;
 		for (String element : localizaciones) {
 			localizacionesSprites[iteracion] = new Sprites("/sprites/fondos/" + element + ".png", 1366, 768);
+			iteracion++;
+		}
+		// Creo los sprites de los portraits de las localizaciones
+		iteracion = 0;
+		for (String element : localizaciones) {
+			locPortraitSprites[iteracion] = new Sprites("/sprites/portraits/" + element + ".png", 114, 64);
+			iteracion++;
+		}
+		// Creo los sprites de los objetos
+		iteracion = 0;
+		for (String element : getObj()) {
+			objetosSprites[iteracion] = new Sprites("/sprites/objetos/" + element + ".png", 64, 64);
 			iteracion++;
 		}
 
@@ -55,4 +70,11 @@ public class Mapa extends Leer {
 		return localizacionesSprites[index];
 	}
 
+	public Sprites getObjSprite(int index) {
+		return objetosSprites[index];
+	}
+
+	public Sprites getLocPortraitSprite(int index) {
+		return locPortraitSprites[index];
+	}
 }
