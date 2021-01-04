@@ -52,7 +52,7 @@ public class Mapa extends Leer {
 		}
 
 		// Preparo el array de listas
-		for (int i = 0; i < getObj().size(); i++) {
+		for (int i = 0; i < getNumLoc(); i++) {
 			locObjeto[i] = new ArrayList<>();
 		}
 
@@ -77,4 +77,17 @@ public class Mapa extends Leer {
 	public Sprites getLocPortraitSprite(int index) {
 		return locPortraitSprites[index];
 	}
+
+	public List<String> getLocalizaciones() {
+		return localizaciones;
+	}
+
+	public int[] getAdyacencias(int loc) {
+		return matriz[loc];
+	}
+
+	public List<Integer> getObjetosLoc(int loc) {
+		return locObjeto[loc];
+	}
+
 }

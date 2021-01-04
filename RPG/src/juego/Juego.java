@@ -176,7 +176,7 @@ public class Juego extends Canvas implements Runnable {
 
 	public void run() { // Lo que se ejecutar� en el segundo Therad
 		final int NS_POR_SEGUNDO = 1000000000; // Nanosegundos por segundo
-		final byte APS_OBJETIVO = 9; // APS Actualizaciones por segundo
+		final byte APS_OBJETIVO = 12; // APS Actualizaciones por segundo
 		final double NS_POR_ACTUALIZACION = NS_POR_SEGUNDO / APS_OBJETIVO;
 
 		long referenciaActualizacion = System.nanoTime();

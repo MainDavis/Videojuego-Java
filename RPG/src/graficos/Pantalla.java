@@ -63,8 +63,34 @@ public final class Pantalla {
 		if (jugador.getObj() != -1) // Si tengo un objeto
 			mostrarSprite(651, 10, mapa.getObjSprite(jugador.getObj()));
 		// Imprimo los dos objetivos, la localizacion y el objeto
-		mostrarSprite(1100, 100, mapa.getObjSprite(jugador.getObjObjetivo())); // Objeto
-		mostrarSprite(1200, 100, mapa.getLocPortraitSprite(jugador.getLocObjetivo()));
+		mostrarSprite(975, 90, mapa.getObjSprite(jugador.getObjObjetivo())); // Objeto
+		mostrarSprite(1060, 90, mapa.getLocPortraitSprite(jugador.getLocObjetivo()));
+		// Imprimo los objetos de la sala
+		int x = 10;
+		// Primera fila
+
+		for (int i = 0; i < 5 && i < mapa.getObjetosLoc(jugador.getLoc()).size(); i++) {
+			mostrarSprite(x, 10, mapa.getObjSprite(mapa.getObjetosLoc(jugador.getLoc()).get(i)));
+			x += 75;
+		}
+		// Si es necesario segunda fila
+		if (mapa.getObjetosLoc(jugador.getLoc()).size() > 5) {
+			x = 10;
+			for (int i = 5; i < mapa.getObjetosLoc(jugador.getLoc()).size(); i++) {
+				mostrarSprite(x, 85, mapa.getObjSprite(mapa.getObjetosLoc(jugador.getLoc()).get(i)));
+				x += 75;
+			}
+		}
+
+		// Imprimo las localizaciones adyacentes
+		x = 250;
+		for (int i = 0; i < mapa.getLocalizaciones().size(); i++) {
+			if (mapa.getAdyacencias(jugador.getLoc())[i] == 1) {
+				mostrarSprite(x, 500, mapa.getLocPortraitSprite(i));
+				x += 123;
+			}
+
+		}
 	}
 
 	public void mostrarSpriteAnim(int posX, int posY, int personaje) {
