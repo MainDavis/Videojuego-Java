@@ -89,8 +89,22 @@ public final class Pantalla {
 				mostrarSprite(x, 500, mapa.getLocPortraitSprite(i));
 				x += 123;
 			}
-
 		}
+
+		// Imprimo los personajes que están en la misma localización que el jugador con
+		// sus respectivos objetos
+		x = 250;
+		for (int i = 0; i < AI.length; i++) {
+			if (AI[i].getLocalizacion() == jugador.getLoc()) {
+				// Imprimo el portrait del personaje
+				mostrarSprite(x, 583, AI[i].getPortrait());
+				// Si tiene objeto lo imprimo también
+				if (AI[i].getObjeto() != -1)
+					mostrarSprite(x, 615, mapa.getObjPortraitSprite(AI[i].getObjeto()));
+				x += 123;
+			}
+		}
+
 	}
 
 	public void mostrarSpriteAnim(int posX, int posY, int personaje) {

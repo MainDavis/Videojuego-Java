@@ -83,10 +83,12 @@ public class Juego extends Canvas implements Runnable {
 		// Creo los personajes
 
 		for (int i = 1; i < leer.getNumPersonajes(); i++) { // Empiezo en 1 porque el primero es el jugador
-			personajesAI[i - 1] = new PersonajesAI(leer.getPersonajes().get(i), leer.getPersonajeLocIniINT(i),
-					leer.getPersonajeObjetoInicial(leer.getPersonajes().get(i)), leer.getObjObjetivo(i),
-					leer.getLocObjetivo(i));
+			personajesAI[i - 1] = new PersonajesAI(leer.getPersonajes().get(i),
+					leer.getPersonajeObjetoInicial(leer.getPersonajes().get(i)), leer.getPersonajeLocIniINT(i),
+					leer.getObjObjetivo(i), leer.getLocObjetivo(i));
 		}
+
+		System.out.println();
 
 		// Fin de creacion de personajes
 		// Creo el personaje del Jugador
