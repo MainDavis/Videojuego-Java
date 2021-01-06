@@ -48,7 +48,12 @@ public class Juego extends Canvas implements Runnable {
 
 	// Creo los botones
 	private static Boton btt_newGame = new Boton(533, 334, 300, 100);
+	private static Boton btt_personajes[] = new Boton[leer.getNumPersonajes() - 1];
+	private static Boton btt_objetos[] = new Boton[leer.getNumObj()];
+	private static Boton btt_localizaciones[] = new Boton[leer.getNumLoc()];
+	private static Boton btt_acciones[] = new Boton[6];
 
+	// Preparo el buffer de imagenes
 	private static BufferedImage imagen = new BufferedImage(ANCHO, ALTO, BufferedImage.TYPE_INT_RGB);
 	private static int[] pixeles = ((DataBufferInt) imagen.getRaster().getDataBuffer()).getData();
 
@@ -95,9 +100,46 @@ public class Juego extends Canvas implements Runnable {
 		jugador = new Jugador(leer.getPersonajes().get(0), leer.getPersonajeObjetoInicial(leer.getPersonajes().get(0)),
 				leer.getPersonajeLocIniINT(0), leer.getObjObjetivo(0), leer.getLocObjetivo(0));
 
+		// Pongo a los botones sus valores
+		// Botones de selección de personajes
+		int x = 250;
+		for (int i = 0; i < btt_personajes.length; i++) {
+			btt_personajes[i] = new Boton(x, 583, 114, 64);
+			x += 123;
+		}
+		// Botones de selección de localizaciones
+		x = 250;
+		for (int i = 0; i < btt_localizaciones.length; i++) {
+			btt_localizaciones[i] = new Boton(x, 500, 114, 64);
+			x += 123;
+		}
+		// Botones de objetos
+		x = 10;
+		// Primera fila
+		for (int i = 0; i < 5 && i < btt_objetos.length; i++) {
+			btt_objetos[i] = new Boton(x, 10, 64, 64);
+			x += 75;
+		}
+		if (btt_objetos.length > 5) { // Si se necesita crea la otra fila de botones
+			for (int i = 5; i < btt_objetos.length; i++) {
+				btt_objetos[i] = new Boton(x, 85, 64, 64);
+				x += 75;
+			}
+		}
+		// Creo los botones de acción
+		x = 15;
+		for (int i = 0; i < 6; i++) {
+			btt_acciones[i] = new Boton(x, 672, 216, 66);
+			x += 224;
+		}
+
 		Juego juego = new Juego();
 
 		juego.iniciar(); // Para los graficos y los controles
+
+		// Empiezan las rondas
+
+//		jugador.dameAccion(jugador, personajesAI, mapa, 1);
 
 		do {
 			if (nivel == 1) {
@@ -145,11 +187,30 @@ public class Juego extends Canvas implements Runnable {
 			raton.actualizarClickBtt(btt_newGame);
 			if (btt_newGame.getClick()) {
 				nivel = 1;
-				System.out.print("CLICK");
 			}
 			break;
 		case 1: // Juego
 			pantalla.mostrarJuego(personajesAI, jugador, mapa);
+
+			// System.out.println(mapa.adyacenciaLoc(jugador.getLoc()).toString());
+			for (int i = 0; i < 6; i++) {
+				raton.actualizarClickBtt(btt_acciones[i]);
+				if (btt_acciones[1].getClick()) {
+					pantalla.mostrarSpriteAnim(10, 10, 5);
+					for (int j = 0; j < mapa.getAdyacencias(jugador.getLoc()).length; j++) {
+						raton.actualizarClickBtt(btt_localizaciones[j]);
+						if (btt_localizaciones[j].getClick()) {
+
+							jugador.setLoc(mapa.adyacenciaLoc(jugador.getLoc()).get(j));
+
+							btt_localizaciones[j].setClick(false);
+							btt_acciones[1].setClick(false);
+						}
+					}
+				}
+
+			}
+
 			break;
 		}
 
@@ -178,7 +239,7 @@ public class Juego extends Canvas implements Runnable {
 
 	public void run() { // Lo que se ejecutar� en el segundo Therad
 		final int NS_POR_SEGUNDO = 1000000000; // Nanosegundos por segundo
-		final byte APS_OBJETIVO = 12; // APS Actualizaciones por segundo
+		final byte APS_OBJETIVO = 9; // APS Actualizaciones por segundo
 		final double NS_POR_ACTUALIZACION = NS_POR_SEGUNDO / APS_OBJETIVO;
 
 		long referenciaActualizacion = System.nanoTime();

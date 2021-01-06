@@ -5,7 +5,7 @@ import java.util.List;
 
 import graficos.Sprites;
 
-public class PersonajesAI extends Leer {
+public class PersonajesAI extends Leer implements Accionable{
 
 	private String nombre;
 	private int objeto, localizacion;
@@ -94,5 +94,9 @@ public class PersonajesAI extends Leer {
 
 	public void setLocalizacion(int localizacion) {
 		this.localizacion = localizacion;
+	}
+
+	public void dameAccion(Jugador jugador, PersonajesAI[] AI, Mapa mapa, int accion) {
+		System.out.println("No");
 	}
 }

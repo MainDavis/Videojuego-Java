@@ -3,7 +3,7 @@ package configuracion;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Jugador {
+public class Jugador implements Accionable {
 	private String nombre;
 	private int obj, loc;
 	private final int objObjetivo, locObjetivo;
@@ -18,8 +18,8 @@ public class Jugador {
 	}
 
 	public int getNumAnimacion() {
-		String personajes[] = { "gunwoman", "king", "knight", "martial", "ninja", "robot", "skeletonArcher",
-				"skeleteonChief", "skeletonNormal", "wizard" };
+		String personajes[] = { "gunwoman", "king", "knight", "martial", "ninja", "robot", "skeleton_archer",
+				"skeleteon_chief", "skeleton_normal", "wizard" };
 		for (int i = 0; true; i++) { // Nunca se va a pasar del final
 			if (personajes[i].equals(this.nombre)) {
 				return i;
@@ -45,5 +45,13 @@ public class Jugador {
 
 	public int getLocObjetivo() {
 		return this.locObjetivo;
+	}
+
+	public void dameAccion(Jugador jugador, PersonajesAI[] AI, Mapa mapa, int accion) {
+		System.out.println("SI");
+	}
+
+	public void setLoc(int loc) {
+		this.loc = loc;
 	}
 }

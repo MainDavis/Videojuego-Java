@@ -101,4 +101,14 @@ public class Mapa extends Leer {
 		return locObjeto[loc];
 	}
 
+	public List<Integer> adyacenciaLoc(int loc) {
+		List<Integer> ady = new ArrayList<Integer>();
+		for (int i = 0; i < matriz[loc].length; i++) {
+			if (matriz[loc][i] == 1) {
+				ady.add(i);
+			}
+		}
+
+		return ady;
+	}
 }

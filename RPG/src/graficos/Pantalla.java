@@ -22,14 +22,14 @@ public final class Pantalla {
 
 		// Creo el array de personajes con sus animaciones
 		personajes[0] = new Animaciones("gunwoman", 22);
-		personajes[1] = new Animaciones("king", 6);
+		personajes[1] = new Animaciones("king", 8);
 		personajes[2] = new Animaciones("knight", 14);
 		personajes[3] = new Animaciones("martial", 8);
 		personajes[4] = new Animaciones("ninja", 4);
 		personajes[5] = new Animaciones("robot", 18);
-		personajes[6] = new Animaciones("skeletonArcher", 8);
-		personajes[7] = new Animaciones("skeletonChief", 8);
-		personajes[8] = new Animaciones("skeletonNormal", 8);
+		personajes[6] = new Animaciones("skeleton_archer", 8);
+		personajes[7] = new Animaciones("skeleton_chief", 8);
+		personajes[8] = new Animaciones("skeleton_normal", 8);
 		personajes[9] = new Animaciones("wizard", 10);
 
 		//
