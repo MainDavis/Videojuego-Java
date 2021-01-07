@@ -101,6 +101,10 @@ public class Mapa extends Leer {
 		return locObjeto[loc];
 	}
 
+	public void setObjetosLoc(int loc, int obj) {
+		this.locObjeto[loc].add(obj);
+	}
+
 	public List<Integer> adyacenciaLoc(int loc) {
 		List<Integer> ady = new ArrayList<Integer>();
 		for (int i = 0; i < matriz[loc].length; i++) {

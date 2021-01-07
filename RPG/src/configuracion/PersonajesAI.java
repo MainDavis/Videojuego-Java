@@ -103,9 +103,8 @@ public class PersonajesAI extends Leer implements Accionable {
 		return null;
 	}
 
-	public int[] dameAccion(Boton[] btt_personajes, Boton[] btt_objetos, Boton[] btt_localizaciones,
+	public void dameAccion(Boton[] btt_personajes, Boton[] btt_objetos, Boton[] btt_localizaciones,
 			Boton[] btt_acciones, Jugador jugador, PersonajesAI personajesAI[], Mapa mapa) {
 
-		return null;
 	}
 }

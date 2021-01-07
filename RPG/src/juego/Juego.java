@@ -139,9 +139,9 @@ public class Juego extends Canvas implements Runnable {
 
 		// Empiezan las rondas
 
-//		jugador.dameAccion(jugador, personajesAI, mapa, 1);
-
-		do {
+		while (true) {
+			if (nivel == 0)
+				System.out.print("");// Por algun motivo solo funciona si esto está wtf
 			if (nivel == 1) {
 				jugador.dameAccion(btt_personajes, btt_objetos, btt_localizaciones, btt_acciones, jugador, personajesAI,
 						mapa);
@@ -150,7 +150,7 @@ public class Juego extends Canvas implements Runnable {
 							mapa);
 				}
 			}
-		} while (true);
+		}
 
 	}
 
@@ -198,37 +198,37 @@ public class Juego extends Canvas implements Runnable {
 			pantalla.mostrarJuego(personajesAI, jugador, mapa);
 
 			// Actualizo los botones
-			// Botones de seleccion de objetos
-			for (int i = 0; i < btt_objetos.length; i++)
-				raton.actualizarClickBtt(btt_objetos[i]);
-			// Botones de seleccion de personajes
-			for (int i = 0; i < btt_personajes.length; i++)
-				raton.actualizarClickBtt(btt_personajes[i]);
-			// Botones de seleccion de localizacoines
-			for (int i = 0; i < btt_localizaciones.length; i++)
-				raton.actualizarClickBtt(btt_localizaciones[i]);
-			// Botones de seleccion de accion
-			for (int i = 0; i < btt_acciones.length; i++)
+			// Botones de seleccion de accion se deshabilitan si se pulsa otro
+			for (int i = 0; i < btt_acciones.length; i++) {
+				boolean anterior = btt_acciones[i].getClick();
 				raton.actualizarClickBtt(btt_acciones[i]);
+				if (anterior == false && btt_acciones[i].getClick()) { // Si se ha pulsado ahora
+					for (int j = 0; j < 6; j++) {
+						if (j != i)
+							btt_acciones[j].setClick(false);
+					}
+				}
+			}
+			// Botones de seleccion de objetos solo se actualiza si el boton de coger o
+			// dejar esta activado
+			if (btt_acciones[0].getClick() || btt_acciones[1].getClick())
+				for (int i = 0; i < btt_objetos.length; i++)
+					raton.actualizarClickBtt(btt_objetos[i]);
+			// Botones de seleccion de personajes
+			if (btt_acciones[4].getClick() || btt_acciones[5].getClick())
+				for (int i = 0; i < btt_personajes.length; i++)
+					raton.actualizarClickBtt(btt_personajes[i]);
+			// Botones de seleccion de localizaciones solo se activan si el boton de moverse
+			// está activado
+			if (btt_acciones[2].getClick())
+				for (int i = 0; i < btt_localizaciones.length; i++)
+					raton.actualizarClickBtt(btt_localizaciones[i]);
 
-			// System.out.println(mapa.adyacenciaLoc(jugador.getLoc()).toString());
-//			for (int i = 0; i < 6; i++) {
-//				raton.actualizarClickBtt(btt_acciones[i]);
-//				if (btt_acciones[1].getClick()) {
-//					pantalla.mostrarSpriteAnim(10, 10, 5);
-//					for (int j = 0; j < mapa.getAdyacencias(jugador.getLoc()).length; j++) {
-//						raton.actualizarClickBtt(btt_localizaciones[j]);
-//						if (btt_localizaciones[j].getClick()) {
-//
-//							jugador.setLoc(mapa.adyacenciaLoc(jugador.getLoc()).get(j));
-//
-//							btt_localizaciones[j].setClick(false);
-//							btt_acciones[1].setClick(false);
-//						}
-//					}
-//				}
-//
-//			}
+			if (btt_acciones[4].getClick())
+				pantalla.mostrarSpriteAnim(10, 10, 5);
+
+			if (btt_acciones[0].getClick())
+				pantalla.mostrarSpriteAnim(200, 10, 5);
 
 			break;
 		}

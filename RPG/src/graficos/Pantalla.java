@@ -61,7 +61,7 @@ public final class Pantalla {
 		mostrarSpriteAnim(587, 288, animJugador);
 		// Imprimo el objeto
 		if (jugador.getObj() != -1) // Si tengo un objeto
-			mostrarSprite(651, 10, mapa.getObjSprite(jugador.getObj()));
+			mostrarSprite(651, 25, mapa.getObjSprite(jugador.getObj()));
 		// Imprimo los dos objetivos, la localizacion y el objeto
 		mostrarSprite(975, 90, mapa.getObjSprite(jugador.getObjObjetivo())); // Objeto
 		mostrarSprite(1060, 90, mapa.getLocPortraitSprite(jugador.getLocObjetivo()));
