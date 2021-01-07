@@ -143,7 +143,12 @@ public class Juego extends Canvas implements Runnable {
 
 		do {
 			if (nivel == 1) {
-
+				jugador.dameAccion(btt_personajes, btt_objetos, btt_localizaciones, btt_acciones, jugador, personajesAI,
+						mapa);
+				for (PersonajesAI AI : personajesAI) {
+					AI.dameAccion(btt_personajes, btt_objetos, btt_localizaciones, btt_acciones, jugador, personajesAI,
+							mapa);
+				}
 			}
 		} while (true);
 
@@ -192,24 +197,38 @@ public class Juego extends Canvas implements Runnable {
 		case 1: // Juego
 			pantalla.mostrarJuego(personajesAI, jugador, mapa);
 
-			// System.out.println(mapa.adyacenciaLoc(jugador.getLoc()).toString());
-			for (int i = 0; i < 6; i++) {
+			// Actualizo los botones
+			// Botones de seleccion de objetos
+			for (int i = 0; i < btt_objetos.length; i++)
+				raton.actualizarClickBtt(btt_objetos[i]);
+			// Botones de seleccion de personajes
+			for (int i = 0; i < btt_personajes.length; i++)
+				raton.actualizarClickBtt(btt_personajes[i]);
+			// Botones de seleccion de localizacoines
+			for (int i = 0; i < btt_localizaciones.length; i++)
+				raton.actualizarClickBtt(btt_localizaciones[i]);
+			// Botones de seleccion de accion
+			for (int i = 0; i < btt_acciones.length; i++)
 				raton.actualizarClickBtt(btt_acciones[i]);
-				if (btt_acciones[1].getClick()) {
-					pantalla.mostrarSpriteAnim(10, 10, 5);
-					for (int j = 0; j < mapa.getAdyacencias(jugador.getLoc()).length; j++) {
-						raton.actualizarClickBtt(btt_localizaciones[j]);
-						if (btt_localizaciones[j].getClick()) {
 
-							jugador.setLoc(mapa.adyacenciaLoc(jugador.getLoc()).get(j));
-
-							btt_localizaciones[j].setClick(false);
-							btt_acciones[1].setClick(false);
-						}
-					}
-				}
-
-			}
+			// System.out.println(mapa.adyacenciaLoc(jugador.getLoc()).toString());
+//			for (int i = 0; i < 6; i++) {
+//				raton.actualizarClickBtt(btt_acciones[i]);
+//				if (btt_acciones[1].getClick()) {
+//					pantalla.mostrarSpriteAnim(10, 10, 5);
+//					for (int j = 0; j < mapa.getAdyacencias(jugador.getLoc()).length; j++) {
+//						raton.actualizarClickBtt(btt_localizaciones[j]);
+//						if (btt_localizaciones[j].getClick()) {
+//
+//							jugador.setLoc(mapa.adyacenciaLoc(jugador.getLoc()).get(j));
+//
+//							btt_localizaciones[j].setClick(false);
+//							btt_acciones[1].setClick(false);
+//						}
+//					}
+//				}
+//
+//			}
 
 			break;
 		}

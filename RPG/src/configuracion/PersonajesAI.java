@@ -3,9 +3,10 @@ package configuracion;
 import java.util.ArrayList;
 import java.util.List;
 
+import control.Boton;
 import graficos.Sprites;
 
-public class PersonajesAI extends Leer implements Accionable{
+public class PersonajesAI extends Leer implements Accionable {
 
 	private String nombre;
 	private int objeto, localizacion;
@@ -96,7 +97,15 @@ public class PersonajesAI extends Leer implements Accionable{
 		this.localizacion = localizacion;
 	}
 
-	public void dameAccion(Jugador jugador, PersonajesAI[] AI, Mapa mapa, int accion) {
-		System.out.println("No");
+	public int[] dameAccion(Boton[] btt_personajes, Boton[] btt_objetos, Boton[] btt_localizaciones,
+			Boton[] btt_acciones) {
+
+		return null;
+	}
+
+	public int[] dameAccion(Boton[] btt_personajes, Boton[] btt_objetos, Boton[] btt_localizaciones,
+			Boton[] btt_acciones, Jugador jugador, PersonajesAI personajesAI[], Mapa mapa) {
+
+		return null;
 	}
 }

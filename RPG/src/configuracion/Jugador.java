@@ -3,6 +3,8 @@ package configuracion;
 import java.util.ArrayList;
 import java.util.List;
 
+import control.Boton;
+
 public class Jugador implements Accionable {
 	private String nombre;
 	private int obj, loc;
@@ -47,11 +49,22 @@ public class Jugador implements Accionable {
 		return this.locObjetivo;
 	}
 
-	public void dameAccion(Jugador jugador, PersonajesAI[] AI, Mapa mapa, int accion) {
-		System.out.println("SI");
-	}
-
 	public void setLoc(int loc) {
 		this.loc = loc;
+	}
+
+	public int[] dameAccion(Boton[] btt_personajes, Boton[] btt_objetos, Boton[] btt_localizaciones,
+			Boton[] btt_acciones, Jugador jugador, PersonajesAI personajesAI[], Mapa mapa) {
+		// Botones acciones:
+		// 0-CogerObjeto, 1-DejarObjeto, 2-Moverse, 3-Nada, 4-PedirObjeto, 5-DarObjeto
+		if (btt_acciones[0].getClick() && jugador.getObj() != -1 && mapa.getLocObj().size() != 0) { // Solo funciona si
+																									// el jugador no
+																									// tiene ningun
+																									// objeto y si hay
+																									// en loc
+
+		}
+
+		return null;
 	}
 }
