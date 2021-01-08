@@ -141,7 +141,7 @@ public class Juego extends Canvas implements Runnable {
 
 		while (true) {
 			if (nivel == 0)
-				System.out.print("");// Por algun motivo solo funciona si esto está wtf
+				System.out.print("MENU");// Por algun motivo solo funciona si esto está wtf
 			if (nivel == 1) {
 				jugador.dameAccion(btt_personajes, btt_objetos, btt_localizaciones, btt_acciones, jugador, personajesAI,
 						mapa);
