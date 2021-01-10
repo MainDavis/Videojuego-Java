@@ -85,7 +85,8 @@ public class Juego extends Canvas implements Runnable {
 	}
 
 	public static void main(String[] args) {
-
+		// new DFS(mapa.getMatriz());
+		System.exit(-1);
 		// Creo los personajes
 
 		for (int i = 1; i < leer.getNumPersonajes(); i++) { // Empiezo en 1 porque el primero es el jugador

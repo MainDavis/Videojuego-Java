@@ -1,36 +1,41 @@
 package configuracion;
 
-import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.Stack;
 
 public class DFS {
-	private LinkedList<Integer> adjLists[];
-	private boolean visited[];
+	Stack<Integer> stack;
+	int first;
+	int[][] adjMatrix;
+	int[] visited = new int[7];
 
-	// Graph creation
-	public DFS(int vertices) {
-		adjLists = new LinkedList[vertices];
-		visited = new boolean[vertices];
+	public DFS(int[][] Matrix) {
 
-		for (int i = 0; i < vertices; i++)
-			adjLists[i] = new LinkedList<Integer>();
+		this.adjMatrix = Matrix;
+		stack = new Stack<Integer>();
+		int[] node = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+		int firstNode = node[0];
+		depthFirstSearch(firstNode, 7);
 	}
 
-	// Add edges
-	public void addEdge(int src, int dest) {
-		adjLists[src].add(dest);
-	}
+	public void depthFirstSearch(int first, int n) {
+		int v, i;
 
-	// DFS algorithm
-	public void algoritmo(int vertex) {
-		visited[vertex] = true;
-		System.out.print(vertex + " ");
+		stack.push(first);
 
-		Iterator<Integer> ite = adjLists[vertex].listIterator();
-		while (ite.hasNext()) {
-			int adj = ite.next();
-			if (!visited[adj])
-				algoritmo(adj);
+		while (!stack.isEmpty()) {
+			v = stack.pop();
+			if (visited[v] == 0) {
+				System.out.print("\n" + (v + 1));
+				visited[v] = 1;
+			}
+			for (i = 0; i < n; i++) {
+				if ((adjMatrix[v][i] == 1) && (visited[i] == 0)) {
+					stack.push(v);
+					visited[i] = 1;
+					System.out.print(" " + (i + 1));
+					v = i;
+				}
+			}
 		}
 	}
 }

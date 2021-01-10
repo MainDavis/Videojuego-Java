@@ -120,4 +120,8 @@ public class Mapa extends Leer {
 	public void removeObjetoLoc(int loc, int obj) {
 		locObjeto[loc].remove(obj);
 	}
+
+	public int[][] getMatriz() {
+		return matriz;
+	}
 }
