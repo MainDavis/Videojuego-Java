@@ -19,6 +19,7 @@ import control.Boton;
 import control.Raton;
 import control.Teclado;
 import graficos.Pantalla;
+import graficos.Sprites;
 
 public class Juego extends Canvas implements Runnable {
 
@@ -138,18 +139,24 @@ public class Juego extends Canvas implements Runnable {
 		juego.iniciar(); // Para los graficos y los controles
 
 		// Empiezan las rondas
-
+		int numAccionesAnteriores;
 		while (true) {
 			if (nivel == 0)
 				System.out.print("MENU");// Por algun motivo solo funciona si esto está wtf
 			if (nivel == 1) {
-				jugador.dameAccion(btt_personajes, btt_objetos, btt_localizaciones, btt_acciones, jugador, personajesAI,
-						mapa);
-				for (PersonajesAI AI : personajesAI) {
+				numAccionesAnteriores = jugador.getRegistro().size();
+				do {
+					jugador.dameAccion(btt_personajes, btt_objetos, btt_localizaciones, btt_acciones, jugador,
+							personajesAI, mapa);
+				} while (numAccionesAnteriores == jugador.getRegistro().size());
 
+				for (PersonajesAI AI : personajesAI) {
 					AI.dameAccion(btt_personajes, btt_objetos, btt_localizaciones, btt_acciones, jugador, personajesAI,
 							mapa);
+					System.out.println(AI.getNombre() + " registro: " + AI.getRegistro().toString());
 				}
+				System.out.println("-----------------");
+
 			}
 		}
 
@@ -199,17 +206,7 @@ public class Juego extends Canvas implements Runnable {
 			pantalla.mostrarJuego(personajesAI, jugador, mapa);
 
 			// Actualizo los botones
-			// Botones de seleccion de accion se deshabilitan si se pulsa otro
-			for (int i = 0; i < btt_acciones.length; i++) {
-				boolean anterior = btt_acciones[i].getClick();
-				raton.actualizarClickBtt(btt_acciones[i]);
-				if (anterior == false && btt_acciones[i].getClick()) { // Si se ha pulsado ahora
-					for (int j = 0; j < 6; j++) {
-						if (j != i)
-							btt_acciones[j].setClick(false);
-					}
-				}
-			}
+
 			// Botones de seleccion de objetos solo se actualiza si el boton de coger o
 			// dejar esta activado
 			if (btt_acciones[0].getClick() || btt_acciones[1].getClick())
@@ -225,11 +222,35 @@ public class Juego extends Canvas implements Runnable {
 				for (int i = 0; i < btt_localizaciones.length; i++)
 					raton.actualizarClickBtt(btt_localizaciones[i]);
 
-			if (btt_acciones[4].getClick())
-				pantalla.mostrarSpriteAnim(10, 10, 5);
+			// Botones de seleccion de accion se deshabilitan si se pulsa otro
+			for (int i = 0; i < 6; i++) {
+				boolean anterior = btt_acciones[i].getClick();
+				raton.actualizarClickBtt(btt_acciones[i]);
+				if (anterior == false && btt_acciones[i].getClick()) { // Si se ha pulsado ahora
+					for (int j = 0; j < 6; j++) {
+						if (j != i)
+							btt_acciones[j].setClick(false);
+					}
+				}
+				// Imprimo el sprite de boton pulsado
+				if (btt_acciones[i].getClick()) {
+					switch (i) {
+					case 0:
+						pantalla.mostrarSprite(0, 0, Sprites.btt_coger);
+						break;
+					case 2:
+						pantalla.mostrarSprite(0, 0, Sprites.btt_mover);
+						break;
+					case 4:
+						pantalla.mostrarSprite(0, 0, Sprites.btt_dar);
+						break;
+					case 5:
+						pantalla.mostrarSprite(0, 0, Sprites.btt_pedir);
+						break;
+					}
+				}
 
-			if (btt_acciones[0].getClick())
-				pantalla.mostrarSpriteAnim(200, 10, 5);
+			}
 
 			break;
 		}

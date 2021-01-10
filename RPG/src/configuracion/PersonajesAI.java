@@ -11,6 +11,7 @@ public class PersonajesAI extends Leer implements Accionable {
 	private String nombre;
 	private int objeto, localizacion, personajePedido = -1;
 	private final int objetivoObjeto, objetivolocalizacion; // personajePedido/objeto = -1 si no hay
+	private boolean locVisitados[] = new boolean[getNumLoc()];
 
 	private List<Integer> creenciasLocPersonajes[] = new List[getNumLoc()];
 	private List<Integer> creenciasLocObjetos[] = new List[getNumLoc()];
@@ -103,6 +104,15 @@ public class PersonajesAI extends Leer implements Accionable {
 		return null;
 	}
 
+	public int getPersonajePedido() {
+		return personajePedido;
+	}
+
+	public void mover() {
+		// Algoritmo de movimiento
+		// Siempre me voy a mover al primer objetivo a el que
+	}
+
 	public void dameAccion(Boton[] btt_personajes, Boton[] btt_objetos, Boton[] btt_localizaciones,
 			Boton[] btt_acciones, Jugador jugador, PersonajesAI personajesAI[], Mapa mapa) {
 
@@ -171,17 +181,21 @@ public class PersonajesAI extends Leer implements Accionable {
 				// Si hay un jugador con mi objeto lo pido
 				for (int i = 0; i < personajesAI.length; i++) {
 					if (personajesAI[i].objeto == objetivoObjeto && personajesAI[i].localizacion == localizacion) {
-						personajesAI[i].personajePedido = i;
-						registro.add(5);
-						return;
+						for (int j = 0; i < personajesAI.length; j++) {
+							if (personajesAI[j].nombre.equals(nombre)) {
+								personajesAI[i].personajePedido = j;
+								registro.add(5);
+								return;
+							}
+						}
 					}
 				}
 
 				// Si el objeto que necesito está en la sala
 				if (mapa.getObjetosLoc(localizacion).indexOf(objetivoObjeto) != -1) {
-					System.out.println(mapa.getObjetosLoc(localizacion));
+
 					objeto = objetivoObjeto;
-					mapa.removeObjetoLoc(localizacion, objeto);
+					mapa.removeObjetoLoc(localizacion, mapa.getObjetosLoc(localizacion).indexOf(objeto));
 					registro.add(0); // Coger
 				}
 

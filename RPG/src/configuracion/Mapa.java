@@ -68,9 +68,10 @@ public class Mapa extends Leer {
 		for (String element : getLocObj()) {
 			if (localizaciones.contains(element)) {
 				locObjeto[localizaciones.indexOf(element)].add(i);
-				i++;
 			}
+			i++;
 		}
+
 	}
 
 	public Sprites getLocSprite(int index) {

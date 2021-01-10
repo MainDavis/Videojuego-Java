@@ -16,6 +16,11 @@ public class Sprites {
 	// UI
 	public static Sprites button_start = new Sprites("/sprites/ui/new_game_button.png", 300, 100);
 
+	public static Sprites btt_coger = new Sprites("/sprites/ui/boton_coger.png", 1366, 768);
+	public static Sprites btt_mover = new Sprites("/sprites/ui/boton_viajar.png", 1366, 768);
+	public static Sprites btt_dar = new Sprites("/sprites/ui/boton_dar.png", 1366, 768);
+	public static Sprites btt_pedir = new Sprites("/sprites/ui/boton_pedir.png", 1366, 768);
+
 	// Fin de la colecci�n
 
 	public Sprites(final String ruta, final int ancho, final int alto) {
