@@ -146,6 +146,7 @@ public class Juego extends Canvas implements Runnable {
 				jugador.dameAccion(btt_personajes, btt_objetos, btt_localizaciones, btt_acciones, jugador, personajesAI,
 						mapa);
 				for (PersonajesAI AI : personajesAI) {
+
 					AI.dameAccion(btt_personajes, btt_objetos, btt_localizaciones, btt_acciones, jugador, personajesAI,
 							mapa);
 				}
