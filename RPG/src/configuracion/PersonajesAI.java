@@ -128,28 +128,69 @@ public class PersonajesAI extends Leer implements Accionable {
 		// 1. Me muevo
 
 		if (objeto != objetivoObjeto) { // Si no tiene el objeto objetivo
-			if (objeto != -1) {
+			if (objeto != -1) { // Si tiene un objeto
+				// Si un jugador necesita el objeto que tengo o un jugador tiene mi objeto
 				for (int i = 0; i < personajesAI.length; i++) {
-
 					if (objeto == personajesAI[i].objetivoObjeto && localizacion == personajesAI[i].localizacion) {
 						if (personajePedido == i) {
 							// Le doy el objeto
 							personajesAI[i].objeto = objeto;
 							objeto = -1; // Quito el objeto
-							registro.add(4);
+							personajePedido = -1; // Quito el pedido
+							registro.add(4); // Dar
 							return;
 						} else {
-							registro.add(3);
+							registro.add(3); // Nada
 							return; // No hago nada y espero
 						}
+					} else if (personajesAI[i].objeto == objetivoObjeto
+							&& personajesAI[i].localizacion == localizacion) {
+						// Si hay un jugador que tiene mi objeto, dejo el mio
+						mapa.setObjetosLoc(localizacion, objeto);
+						objeto = -1;
+						registro.add(1); // Dejar
+						return;
 					}
 				}
 
+				// Si está el objeto que necesito en la misma localizacion que yo
+
+				if (mapa.getObjetosLoc(localizacion).indexOf(objetivoObjeto) != -1) {
+					mapa.setObjetosLoc(localizacion, objeto);
+					objeto = -1;
+					registro.add(1); // Dejar
+					return;
+				}
+
+				// Si no es nada de eso me muevo
+				registro.add(2);
+				return;
+
 			} else if (true) { // Si no tengo ningun objeto
 
+				// Si hay un jugador con mi objeto lo pido
+				for (int i = 0; i < personajesAI.length; i++) {
+					if (personajesAI[i].objeto == objetivoObjeto && personajesAI[i].localizacion == localizacion) {
+						personajesAI[i].personajePedido = i;
+						registro.add(5);
+						return;
+					}
+				}
+
+				// Si el objeto que necesito está en la sala
+				if (mapa.getObjetosLoc(localizacion).indexOf(objetivoObjeto) != -1) {
+					objeto = objetivoObjeto;
+					mapa.getObjetosLoc(localizacion).remove(objeto);
+					registro.add(0); // Coger
+				}
+
+				// Si no se cumple nada me muevo
+				registro.add(2);
+				return;
 			}
 
 		} else { // Si tengo el objeto que necesito
+			// Me muevo
 
 		}
 
