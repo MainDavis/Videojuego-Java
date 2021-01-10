@@ -179,8 +179,9 @@ public class PersonajesAI extends Leer implements Accionable {
 
 				// Si el objeto que necesito está en la sala
 				if (mapa.getObjetosLoc(localizacion).indexOf(objetivoObjeto) != -1) {
+					System.out.println(mapa.getObjetosLoc(localizacion));
 					objeto = objetivoObjeto;
-					mapa.getObjetosLoc(localizacion).remove(objeto);
+					mapa.removeObjetoLoc(localizacion, objeto);
 					registro.add(0); // Coger
 				}
 
@@ -190,8 +191,15 @@ public class PersonajesAI extends Leer implements Accionable {
 			}
 
 		} else { // Si tengo el objeto que necesito
-			// Me muevo
-
+			if (localizacion != objetivolocalizacion) {
+				// Me muevo
+				registro.add(2);
+				return;
+			} else {
+				// Si tengo el objeto y estoy en la localizacion objetivo no hago nada
+				registro.add(3);
+				return;
+			}
 		}
 
 	}
