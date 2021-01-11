@@ -26,7 +26,8 @@ David Villaverde, Alejandro García, Miguel Perez y Guillermo Carrasco.
 
 ## Ayuda HUD:
 
-![Imagen de ayuda del HUD](/rpg/recursos/Ayuda.png)
+![Imagen de ayuda del HUD](Ayuda.png)
+
 * #1. Objetos disponibles en la sala.
 * #2. Objeto del jugador.
 * #3. Objetivos del jugador.
