@@ -1,4 +1,4 @@
-<Localización Personajes>
+<Localizaciones Personajes>
 Knight(Bambu)
 Gunwoman(Catedral)
 Robot(Muerte)
@@ -9,7 +9,7 @@ skeleton_normal(nieve)
 king(castillo)
 ninja(templo)
 martial(nieve)
-<Posesión Objetos>
+<Posesiones Objetos>
 Yelmo(Gunwoman)
 Llave(Wizard)
 Pocion(Robot)
