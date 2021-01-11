@@ -3,7 +3,7 @@
 ## Miembros:
 
 David Villaverde, Alejandro García, Miguel Perez y Guillermo Carrasco.
-
+<br>
 
 ## Uso:
 
@@ -21,3 +21,18 @@ David Villaverde, Alejandro García, Miguel Perez y Guillermo Carrasco.
 | Ninja           | Nieve          | Maza     |
 | Martial         | Templo         | Medallon |
 | Wizard          | Pueblo         | Anillo   |
+
+<br>
+
+## Ayuda HUD:
+
+![Imagen de ayuda del HUD](/rpg/recursos/Ayuda.png)
+* #1. Objetos disponibles en la sala.
+* #2. Objeto del jugador.
+* #3. Objetivos del jugador.
+* #4. Personaje del jugador.
+* #5. Destinos disponibles.
+* #6. Personajes en la sala.
+* #7. Objeto del personaje.
+* #8. El personaje te está pidiendo el objeto.
+* #9. Botones de acción.
