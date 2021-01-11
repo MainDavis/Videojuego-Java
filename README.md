@@ -1,5 +1,10 @@
 # ProyectoJava
- 
+
+## Miembros:
+
+David Villaverde, Alejandro García, Miguel Perez y Guillermo Carrasco.
+
+
 ## Uso:
 
  Nombres permitidos 
