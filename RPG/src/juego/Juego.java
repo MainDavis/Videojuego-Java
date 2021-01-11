@@ -7,6 +7,10 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -156,18 +160,13 @@ public class Juego extends Canvas implements Runnable {
 
 				// Verifico que la partida no ha terminado
 				partida = false;
-				System.out.println("Jugador -> " + jugador.getRegistro().get(jugador.getRegistro().size() - 1));
 				if (jugador.getRegistro().get(jugador.getRegistro().size() - 1) != 3)
 					partida = true;
 
 				for (PersonajesAI AI : personajesAI) {
-					System.out.println(AI.getNombre() + " -> " + AI.getRegistro().get(AI.getRegistro().size() - 1));
 					if (AI.getRegistro().get(AI.getRegistro().size() - 1) != 3)
 						partida = true;
 				}
-
-				System.out.println("Partida: " + partida);
-				System.out.println("-------------------------------");
 
 				if (!partida)
 					nivel = 2;
@@ -176,6 +175,31 @@ public class Juego extends Canvas implements Runnable {
 				System.out.print("Ha terminado");
 			}
 		} while (partida);
+
+		// Creo o modifico el archivo "registro_personajes.txt" en el que añado todos
+		// los registros de todos los personajes
+		File archivo = new File(System.getProperty("user.dir") + "\\recursos\\registro_personajes.txt");
+		BufferedWriter bw;
+
+		try {
+			bw = new BufferedWriter(new FileWriter(archivo));
+			// Escribo una pequeña ayuda
+			bw.write("[ 0 - Coger | 1 - Dejar | 2 - Viajar | 3 - Nada | 4 - Dar | 5 - Pedir ]");
+			bw.newLine();
+			bw.newLine();
+			// Escribo el registro del personaje
+			bw.write("Jugador: " + jugador.getRegistro().toString());
+			bw.newLine();
+			// Escribo el registro de los personajes de la IA
+			for (PersonajesAI AI : personajesAI) {
+				bw.write(AI.getNombre() + ": " + AI.getRegistro().toString());
+				bw.newLine();
+			}
+
+			bw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 	}
 
