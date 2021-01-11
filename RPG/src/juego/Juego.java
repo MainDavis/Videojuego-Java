@@ -85,17 +85,14 @@ public class Juego extends Canvas implements Runnable {
 	}
 
 	public static void main(String[] args) {
-		// new DFS(mapa.getMatriz());
-		System.exit(-1);
+
 		// Creo los personajes
 
 		for (int i = 1; i < leer.getNumPersonajes(); i++) { // Empiezo en 1 porque el primero es el jugador
 			personajesAI[i - 1] = new PersonajesAI(leer.getPersonajes().get(i),
 					leer.getPersonajeObjetoInicial(leer.getPersonajes().get(i)), leer.getPersonajeLocIniINT(i),
-					leer.getObjObjetivo(i), leer.getLocObjetivo(i));
+					leer.getObjObjetivo(i), leer.getLocObjetivo(i), mapa.getMatriz());
 		}
-
-		System.out.println();
 
 		// Fin de creacion de personajes
 		// Creo el personaje del Jugador
@@ -141,7 +138,8 @@ public class Juego extends Canvas implements Runnable {
 
 		// Empiezan las rondas
 		int numAccionesAnteriores;
-		while (true) {
+		boolean partida = true;
+		do {
 			if (nivel == 0)
 				System.out.print("MENU");// Por algun motivo solo funciona si esto está wtf
 			if (nivel == 1) {
@@ -154,12 +152,30 @@ public class Juego extends Canvas implements Runnable {
 				for (PersonajesAI AI : personajesAI) {
 					AI.dameAccion(btt_personajes, btt_objetos, btt_localizaciones, btt_acciones, jugador, personajesAI,
 							mapa);
-					System.out.println(AI.getNombre() + " registro: " + AI.getRegistro().toString());
 				}
-				System.out.println("-----------------");
 
+				// Verifico que la partida no ha terminado
+				partida = false;
+				System.out.println("Jugador -> " + jugador.getRegistro().get(jugador.getRegistro().size() - 1));
+				if (jugador.getRegistro().get(jugador.getRegistro().size() - 1) != 3)
+					partida = true;
+
+				for (PersonajesAI AI : personajesAI) {
+					System.out.println(AI.getNombre() + " -> " + AI.getRegistro().get(AI.getRegistro().size() - 1));
+					if (AI.getRegistro().get(AI.getRegistro().size() - 1) != 3)
+						partida = true;
+				}
+
+				System.out.println("Partida: " + partida);
+				System.out.println("-------------------------------");
+
+				if (!partida)
+					nivel = 2;
 			}
-		}
+			if (nivel == 2) {
+				System.out.print("Ha terminado");
+			}
+		} while (partida);
 
 	}
 
@@ -168,16 +184,6 @@ public class Juego extends Canvas implements Runnable {
 
 		thread = new Thread(this, "Graficos");
 		thread.start();
-	}
-
-	private synchronized void detener() {
-		enFuncionamiento = false;
-
-		try {
-			thread.join(); // Espera a que termine lo que est� haciendo el Thread y luego lo detiene
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 	}
 
 	private void actualizar() { // Actualizar las variables del juego
@@ -254,6 +260,8 @@ public class Juego extends Canvas implements Runnable {
 			}
 
 			break;
+		case 2:
+			pantalla.mostrarFin();
 		}
 
 		aps++;

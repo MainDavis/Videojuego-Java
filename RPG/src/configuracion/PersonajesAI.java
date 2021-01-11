@@ -2,6 +2,7 @@ package configuracion;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 import control.Boton;
 import graficos.Sprites;
@@ -13,15 +14,17 @@ public class PersonajesAI extends Leer implements Accionable {
 	private final int objetivoObjeto, objetivolocalizacion; // personajePedido/objeto = -1 si no hay
 	private boolean locVisitados[] = new boolean[getNumLoc()];
 
+	private List<Integer> ruta;
+	private int posicionRuta;
+
 	private List<Integer> creenciasLocPersonajes[] = new List[getNumLoc()];
-	private List<Integer> creenciasLocObjetos[] = new List[getNumLoc()];
-	private List<Integer> creenciasPersonajesObjetos[] = new List[getNumPersonajes()];
 
 	private List<Integer> registro = new ArrayList<Integer>();
 
 	private Sprites portrait;
 
-	public PersonajesAI(String nombre, int objeto, int localizacion, int objetivoObjeto, int objetivoLocalizacion) {
+	public PersonajesAI(String nombre, int objeto, int localizacion, int objetivoObjeto, int objetivoLocalizacion,
+			int[][] matriz) {
 
 		// Controlar el nombre, localizaciones y Objetos
 		this.nombre = nombre;
@@ -30,32 +33,53 @@ public class PersonajesAI extends Leer implements Accionable {
 		this.objetivoObjeto = objetivoObjeto;
 		this.objetivolocalizacion = objetivoLocalizacion;
 
+		this.ruta = DFS(matriz, localizacion);
+		this.posicionRuta = 0;
+
 		portrait = new Sprites("/sprites/portraits/" + nombre + ".png", 114, 64);
 
 		// Tanto las creencias como los registros empiezan vacios
+		for (int i = 0; i < getNumLoc(); i++) {
+			creenciasLocPersonajes[i] = new ArrayList<Integer>();
+		}
 
+	}
+
+	public List<Integer> DFS(int[][] matriz, int inicio) {
+
+		List<Integer> ruta = new ArrayList<Integer>(9);
+		boolean[] visitado = new boolean[matriz.length];
+		visitado[inicio] = true;
+		Stack<Integer> stack = new Stack<>();
+
+		stack.push(inicio);
+
+		int i, x;
+
+		while (!stack.isEmpty()) {
+			x = stack.pop();
+			ruta.add(x);
+			for (i = 0; i < matriz.length; i++) {
+				if (matriz[x][i] == 1 && visitado[i] == false) {
+					stack.push(x);
+					visitado[i] = true;
+					ruta.add(i);
+					x = i;
+					i = -1;
+				}
+			}
+		}
+		ruta.remove(0);
+		return ruta;
 	}
 
 	public void setCreenciasLocPersonajes(int localizacion, int personaje) {
-		if (!creenciasLocPersonajes[localizacion].contains(personaje)) {
+		// Si meto -1 es para hacer reset
+		if (personaje == -1) {
+			creenciasLocPersonajes[localizacion].clear();
+		} else if (!creenciasLocPersonajes[localizacion].contains(personaje)) {
 			this.creenciasLocPersonajes[localizacion].add(personaje);
 		}
-	}
-
-	public void setCreenciasLocObjetos(int localizacion, int objeto) {
-		if (!creenciasLocObjetos[localizacion].contains(objeto)) {
-			this.creenciasLocObjetos[localizacion].add(objeto);
-		}
-	}
-
-	public void setCreenciasPersonajesObjetos(int personaje, int objeto) {
-		if (!creenciasPersonajesObjetos[personaje].contains(objeto)) {
-			this.creenciasPersonajesObjetos[personaje].add(objeto);
-		}
-	}
-
-	public List<Integer>[] getCreenciasPersonajesObjetos() { // El unico get que necesito usar de creencias es este
-		return creenciasPersonajesObjetos;
 	}
 
 	public Sprites getPortrait() {
@@ -108,9 +132,29 @@ public class PersonajesAI extends Leer implements Accionable {
 		return personajePedido;
 	}
 
+	public List<Integer> getRuta() {
+		return ruta;
+	}
+
+	public int getPosicionRuta() {
+		return posicionRuta;
+	}
+
+	public void setPeticionJugador() {
+		this.personajePedido = 0;
+	}
+
 	public void mover() {
-		// Algoritmo de movimiento
-		// Siempre me voy a mover al primer objetivo a el que
+		if (posicionRuta == ruta.size()) {
+			posicionRuta = 0;
+		}
+		this.localizacion = ruta.get(posicionRuta);
+		posicionRuta++;
+
+		// Como me muevo, ya no estoy con los personajes de antes por lo que se cancela
+		// el pedido
+		personajePedido = -1;
+
 	}
 
 	public void dameAccion(Boton[] btt_personajes, Boton[] btt_objetos, Boton[] btt_localizaciones,
@@ -142,7 +186,7 @@ public class PersonajesAI extends Leer implements Accionable {
 				// Si un jugador necesita el objeto que tengo o un jugador tiene mi objeto
 				for (int i = 0; i < personajesAI.length; i++) {
 					if (objeto == personajesAI[i].objetivoObjeto && localizacion == personajesAI[i].localizacion) {
-						if (personajePedido == i) {
+						if (personajePedido == i + 1) {
 							// Le doy el objeto
 							personajesAI[i].objeto = objeto;
 							objeto = -1; // Quito el objeto
@@ -159,8 +203,31 @@ public class PersonajesAI extends Leer implements Accionable {
 						mapa.setObjetosLoc(localizacion, objeto);
 						objeto = -1;
 						registro.add(1); // Dejar
+						// Si hay una peticion de objeto lo cancelo
+						personajePedido = -1;
 						return;
 					}
+				}
+
+				// Lo mismo pero para el jugador
+				if (jugador.getObjObjetivo() == objeto && jugador.getLoc() == localizacion) {
+					if (personajePedido == 0) {
+						jugador.setObj(objeto);
+						objeto = -1;
+						personajePedido = -1;
+						registro.add(4); // Dar
+						return;
+					} else {
+						registro.add(3); // Nada
+						return;
+					}
+				} else if (jugador.getObj() == objetivoObjeto && jugador.getLoc() == localizacion) {
+					mapa.setObjetosLoc(localizacion, objeto);
+					objeto = -1;
+					registro.add(1); // Dejar
+					// Si hay una peticion de objeto lo cancelo
+					personajePedido = -1;
+					return;
 				}
 
 				// Si está el objeto que necesito en la misma localizacion que yo
@@ -173,7 +240,21 @@ public class PersonajesAI extends Leer implements Accionable {
 				}
 
 				// Si no es nada de eso me muevo
+				mover();
 				registro.add(2);
+
+				// Actualizo las creecias que tiene el personaje de la nueva localizacion
+				// Primero la reseteo
+				if (creenciasLocPersonajes[localizacion].size() > 0)
+					setCreenciasLocPersonajes(localizacion, -1);
+				// Añado a los personajes
+				if (jugador.getLoc() == localizacion)
+					setCreenciasLocPersonajes(localizacion, 0);
+				for (int i = 0; i < personajesAI.length; i++) {
+					if (personajesAI[i].getLocalizacion() == localizacion)
+						setCreenciasLocPersonajes(localizacion, i + 1);
+				}
+
 				return;
 
 			} else if (true) { // Si no tengo ningun objeto
@@ -181,14 +262,25 @@ public class PersonajesAI extends Leer implements Accionable {
 				// Si hay un jugador con mi objeto lo pido
 				for (int i = 0; i < personajesAI.length; i++) {
 					if (personajesAI[i].objeto == objetivoObjeto && personajesAI[i].localizacion == localizacion) {
-						for (int j = 0; i < personajesAI.length; j++) {
+						for (int j = 0; j < personajesAI.length; j++) {
 							if (personajesAI[j].nombre.equals(nombre)) {
-								personajesAI[i].personajePedido = j;
-								registro.add(5);
+								personajesAI[i].personajePedido = j + 1;
+								registro.add(5); // Pedir
 								return;
 							}
 						}
 					}
+				}
+				// Lo mismo para el jugador
+				if (jugador.getObj() == objetivoObjeto && jugador.getLoc() == localizacion) {
+					for (int i = 0; i < personajesAI.length; i++) {
+						if (personajesAI[i].nombre.equals(nombre)) {
+							jugador.setPersonajePedido(i);
+							registro.add(5); // Pedir
+							return;
+						}
+					}
+
 				}
 
 				// Si el objeto que necesito está en la sala
@@ -197,21 +289,49 @@ public class PersonajesAI extends Leer implements Accionable {
 					objeto = objetivoObjeto;
 					mapa.removeObjetoLoc(localizacion, mapa.getObjetosLoc(localizacion).indexOf(objeto));
 					registro.add(0); // Coger
+					return;
 				}
 
 				// Si no se cumple nada me muevo
-				registro.add(2);
+				mover();
+				registro.add(2); // Mover
+
+				// Actualizo las creecias que tiene el personaje de la nueva localizacion
+				// Primero la reseteo
+				if (creenciasLocPersonajes[localizacion].size() > 0)
+					setCreenciasLocPersonajes(localizacion, -1);
+				// Añado a los personajes
+				if (jugador.getLoc() == localizacion)
+					setCreenciasLocPersonajes(localizacion, 0);
+				for (int i = 0; i < personajesAI.length; i++) {
+					if (personajesAI[i].getLocalizacion() == localizacion)
+						setCreenciasLocPersonajes(localizacion, i + 1);
+				}
 				return;
 			}
 
 		} else { // Si tengo el objeto que necesito
 			if (localizacion != objetivolocalizacion) {
 				// Me muevo
-				registro.add(2);
+				mover();
+				registro.add(2); // Mover
+
+				// Actualizo las creecias que tiene el personaje de la nueva localizacion
+				// Primero la reseteo
+				if (creenciasLocPersonajes[localizacion].size() > 0)
+					setCreenciasLocPersonajes(localizacion, -1);
+				// Añado a los personajes
+				if (jugador.getLoc() == localizacion)
+					setCreenciasLocPersonajes(localizacion, 0);
+				for (int i = 0; i < personajesAI.length; i++) {
+					if (personajesAI[i].getLocalizacion() == localizacion)
+						setCreenciasLocPersonajes(localizacion, i + 1);
+				}
+
 				return;
 			} else {
 				// Si tengo el objeto y estoy en la localizacion objetivo no hago nada
-				registro.add(3);
+				registro.add(3); // Nada
 				return;
 			}
 		}

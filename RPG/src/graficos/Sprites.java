@@ -13,6 +13,7 @@ public class Sprites {
 	// Fondos
 	public static Sprites castillo = new Sprites("/sprites/fondos/muerte.png", 1366, 768);
 	public static Sprites menu_background = new Sprites("/sprites/fondos/menu_background.png", 1366, 768);
+	public static Sprites fin_background = new Sprites("/sprites/fondos/fin_background.png", 1366, 768);
 	// UI
 	public static Sprites button_start = new Sprites("/sprites/ui/new_game_button.png", 300, 100);
 
@@ -20,6 +21,8 @@ public class Sprites {
 	public static Sprites btt_mover = new Sprites("/sprites/ui/boton_viajar.png", 1366, 768);
 	public static Sprites btt_dar = new Sprites("/sprites/ui/boton_dar.png", 1366, 768);
 	public static Sprites btt_pedir = new Sprites("/sprites/ui/boton_pedir.png", 1366, 768);
+
+	public static Sprites manoDar = new Sprites("/sprites/ui/manoDar.png", 32, 32);
 
 	// Fin de la colecci�n
 

@@ -54,6 +54,11 @@ public final class Pantalla {
 
 	}
 
+	public void mostrarFin() {
+		mostrarSprite(0, 0, Sprites.fin_background);
+		mostrarSpriteAnim(360, 518, 0);
+	}
+
 	public void mostrarJuego(PersonajesAI AI[], Jugador jugador, Mapa mapa) {
 		// Primero imprimo la localización en la que está el jugador
 		mostrarSprite(0, 0, mapa.getLocSprite(jugador.getLoc()));
@@ -101,6 +106,11 @@ public final class Pantalla {
 				// Si tiene objeto lo imprimo también
 				if (AI[i].getObjeto() != -1)
 					mostrarSprite(x, 615, mapa.getObjPortraitSprite(AI[i].getObjeto()));
+				// Si un personaje nos está pidiendo un objeto ponemos una mano en el boton de
+				// dar para que el jugador lo vea
+				if (jugador.getPedido() == i) {
+					mostrarSprite(x, 615, Sprites.manoDar);
+				}
 				x += 123;
 			}
 		}

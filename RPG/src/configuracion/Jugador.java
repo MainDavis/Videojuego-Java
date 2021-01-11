@@ -7,7 +7,7 @@ import control.Boton;
 
 public class Jugador implements Accionable {
 	private String nombre;
-	private int obj, loc;
+	private int obj, loc, personajePedido = -1;
 	private final int objObjetivo, locObjetivo;
 	private List<Integer> registro = new ArrayList<Integer>();
 
@@ -57,12 +57,20 @@ public class Jugador implements Accionable {
 		this.obj = obj;
 	}
 
+	public void setPersonajePedido(int personaje) {
+		this.personajePedido = personaje;
+	}
+
 	public void addRegistro(int accion) {
 		this.registro.add(accion);
 	}
 
 	public List<Integer> getRegistro() {
 		return registro;
+	}
+
+	public int getPedido() {
+		return personajePedido;
 	}
 
 	public void dameAccion(Boton[] btt_personajes, Boton[] btt_objetos, Boton[] btt_localizaciones,
@@ -117,17 +125,25 @@ public class Jugador implements Accionable {
 				// Si el personaje AI esta en la misma loc que el jugador
 				if (AI.getLocalizacion() == jugador.getLoc()) {
 					// Si no tiene ningún objeto y su boton seleccionado
-					if (AI.getObjeto() == -1 && btt_personajes[contador].getClick()) {
-						// Le doy el objeto al personaje
-						AI.setObjeto(jugador.getObj());
-						// Le quito el objeto al jugador
-						jugador.setObj(-1);
-						// Quito los botones
-						btt_acciones[4].setClick(false);
-						btt_personajes[contador].setClick(false);
-						// Añado la accion al registro
-						jugador.addRegistro(4);
+					for (int i = 0; i < personajesAI.length; i++) {
+						if (personajesAI[i].getNombre().equals(AI.getNombre())) {
+							if (btt_personajes[contador].getClick() && personajePedido == i) {
+								System.out.println(AI.getNombre() + "->" + i);
+								// Le doy el objeto al personaje
+								AI.setObjeto(jugador.getObj());
+								// Le quito el objeto al jugador
+								jugador.setObj(-1);
+								// Quito el pedido
+								this.personajePedido = -1;
+								// Quito los botones
+								btt_acciones[4].setClick(false);
+								btt_personajes[contador].setClick(false);
+								// Añado la accion al registro
+								jugador.addRegistro(4);
+							}
+						}
 					}
+
 					contador++;
 				}
 			}
@@ -138,7 +154,7 @@ public class Jugador implements Accionable {
 				if (AI.getLocalizacion() == jugador.getLoc()) {
 					// Si tiene un objeto y su boton seleccionado
 					if (AI.getObjeto() != -1 && btt_personajes[contador].getClick()) {
-						// En el pdf dice que esto no hace nada
+						AI.setPeticionJugador();
 						// Quito los botones
 						btt_acciones[5].setClick(false);
 						btt_personajes[contador].setClick(false);
