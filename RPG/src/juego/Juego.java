@@ -21,7 +21,6 @@ import configuracion.Mapa;
 import configuracion.PersonajesAI;
 import control.Boton;
 import control.Raton;
-import control.Teclado;
 import graficos.Pantalla;
 import graficos.Sprites;
 
@@ -43,7 +42,6 @@ public class Juego extends Canvas implements Runnable {
 
 	private static JFrame ventana;
 	private static Thread thread;
-	private static Teclado teclado;
 	private static Raton raton;
 	private static Leer leer = new Leer();
 	private static Mapa mapa = new Mapa();
@@ -82,9 +80,7 @@ public class Juego extends Canvas implements Runnable {
 		ventana.setVisible(true); // La hago visible
 		ventana.setIconImage(icono.getImage());
 
-		teclado = new Teclado(); // Importo el Teclado
 		raton = new Raton(); // Importo el raton
-		addKeyListener(teclado); // A�ado un keyListener para que recopile las teclas pulsadas
 
 	}
 
@@ -214,16 +210,7 @@ public class Juego extends Canvas implements Runnable {
 
 		pantalla.limpiar(); // Limpio la pantalla
 
-		teclado.actualizar();
 		addMouseListener(raton);
-
-		if (teclado.h) {
-			System.out.print("AYUDA");
-		}
-		if (teclado.escape) {
-			System.out.print("Saliendo");
-			System.exit(-1);
-		}
 
 		switch (nivel) {
 		case 0: // Menu inicial

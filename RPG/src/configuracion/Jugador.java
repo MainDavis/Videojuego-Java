@@ -128,7 +128,6 @@ public class Jugador implements Accionable {
 					for (int i = 0; i < personajesAI.length; i++) {
 						if (personajesAI[i].getNombre().equals(AI.getNombre())) {
 							if (btt_personajes[contador].getClick() && personajePedido == i) {
-								System.out.println(AI.getNombre() + "->" + i);
 								// Le doy el objeto al personaje
 								AI.setObjeto(jugador.getObj());
 								// Le quito el objeto al jugador
