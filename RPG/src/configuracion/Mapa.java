@@ -7,8 +7,9 @@ import graficos.Sprites;
 
 public class Mapa extends Leer {
 	private int matriz[][];
-	private List<Integer>[] locObjeto = new List[getNumLoc()]; // Array de listas -> locObjeto[indexLocalizaciones] =
-																// Lista de objetos que hay en esa localización
+	private List<Integer>[] locObjeto = new List[getNumLoc()]; // Array de listas ->
+																// locObjeto[indexLocalizaciones] =
+	// Lista de objetos que hay en esa localización
 	private List<String> localizaciones;
 	private List<String> adyacenciasLocalizaciones;
 	private Sprites localizacionesSprites[] = new Sprites[getNumLoc()];
