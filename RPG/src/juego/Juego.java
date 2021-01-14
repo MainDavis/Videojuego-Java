@@ -34,7 +34,7 @@ public class Juego extends Canvas implements Runnable {
 	private static volatile boolean enFuncionamiento = false; // "Volatile" es que solo pueda ser usado por un Thread a
 																// la vez
 
-	private static final String NOMBRE = "Juego";
+	private static final String NOMBRE = "RPG PROJECT";
 
 	private static int aps = 0;
 	private static int fps = 0;
@@ -140,8 +140,9 @@ public class Juego extends Canvas implements Runnable {
 		int numAccionesAnteriores;
 		boolean partida = true;
 		do {
+
 			if (nivel == 0)
-				System.out.print("MENU");// Por algun motivo solo funciona si esto está wtf
+				System.out.print("MENU");
 			if (nivel == 1) {
 				numAccionesAnteriores = jugador.getRegistro().size();
 				do {
@@ -206,7 +207,7 @@ public class Juego extends Canvas implements Runnable {
 		thread.start();
 	}
 
-	private void actualizar() { // Actualizar las variables del juego
+	private void actualizar() { // Actualizar la pantalla y botones
 
 		pantalla.limpiar(); // Limpio la pantalla
 

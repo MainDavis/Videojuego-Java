@@ -12,6 +12,7 @@ public final class Pantalla {
 	public final int[] pixeles;
 
 	private Animaciones personajes[] = new Animaciones[10];
+	private final int animMenu = (int) (Math.random() * 10);
 	private final int animJugador;
 
 	public Pantalla(final int ancho, final int alto, int animJugador) {
@@ -50,7 +51,7 @@ public final class Pantalla {
 		// UI
 		mostrarSprite(533, 334, Sprites.button_start);
 		// Robot
-		mostrarSpriteAnim(475, 510, 5);
+		mostrarSpriteAnim(475, 510, animMenu);
 
 	}
 
