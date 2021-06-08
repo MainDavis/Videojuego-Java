@@ -2,7 +2,10 @@
 
 ## Miembros:
 
-David Villaverde, Alejandro García, Miguel Perez y Guillermo Carrasco.
+*David Villaverde
+*Alejandro García
+*Miguel Perez
+*Guillermo Carrasco.
 <br>
 
 ## Uso:
