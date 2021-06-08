@@ -1,11 +1,11 @@
 # ProyectoJava
 
 ## Miembros:
-
 *David Villaverde
 *Alejandro García
 *Miguel Perez
 *Guillermo Carrasco.
+
 <br>
 
 ## Uso:
