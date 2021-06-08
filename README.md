@@ -6,8 +6,6 @@
 * Miguel Perez
 * Guillermo Carrasco.
 
-<br>
-
 ## Uso:
 
  Nombres permitidos 
