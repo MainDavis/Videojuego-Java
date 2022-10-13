@@ -1,5 +1,7 @@
 # RPG PROJECT
 
+Videojuego hecho para poner en práctica la programación orientada a objetos
+
 ## Miembros:
 * David Villaverde
 * Alejandro García
